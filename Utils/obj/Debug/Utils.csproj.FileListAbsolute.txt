@@ -1,0 +1,7 @@
+D:\dev\C#\Utils\Utils\Utils\bin\Debug\Utils.exe.config
+D:\dev\C#\Utils\Utils\Utils\bin\Debug\Utils.exe
+D:\dev\C#\Utils\Utils\Utils\bin\Debug\Utils.pdb
+D:\dev\C#\Utils\Utils\Utils\obj\Debug\Utils.csprojAssemblyReference.cache
+D:\dev\C#\Utils\Utils\Utils\obj\Debug\Utils.csproj.CoreCompileInputs.cache
+D:\dev\C#\Utils\Utils\Utils\obj\Debug\Utils.exe
+D:\dev\C#\Utils\Utils\Utils\obj\Debug\Utils.pdb
