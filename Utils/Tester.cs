@@ -6,14 +6,14 @@ using DidasUtils.Compression;
 using DidasUtils.Math;
 using DidasUtils.Networking;
 
-namespace Networking
+namespace Testing
 {
     static class Tester
     {
         static void Main()
         {
             int number = 1;
-            List<Compression.ArithmeticCoding.CompressionResult> results = new List<Compression.ArithmeticCoding.CompressionResult>();
+            List<ArithmeticCompression.CompressionResult> results = new List<ArithmeticCompression.CompressionResult>();
 
             for (int i = 0; i < 6; i++)
             {
@@ -35,7 +35,7 @@ namespace Networking
             Console.ReadLine();
         }
 
-        static Compression.ArithmeticCoding.CompressionResult TestArithmeticCoding(int charCount)
+        static ArithmeticCompression.CompressionResult TestArithmeticCoding(int charCount)
         {
             string comp = string.Empty;
 
@@ -44,7 +44,7 @@ namespace Networking
                 comp += Randomizer.GetRandomChar(i);
             }
 
-            Compression.ArithmeticCoding.CompressionResult result = Compression.ArithmeticCoding.Compress(comp);
+            ArithmeticCompression.CompressionResult result = ArithmeticCompression.Compress(comp);
 
             result.ExportToXml();
 

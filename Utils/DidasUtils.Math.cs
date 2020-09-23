@@ -23,7 +23,7 @@ namespace DidasUtils.Math
 
         public Fraction Simplify()
         {
-            int d = MathUtils.MDC(num, den);
+            int d = MathUtils.GCD(num, den);
 
             num /= d;
             den /= d;
@@ -93,7 +93,7 @@ namespace DidasUtils.Math
 
     public static class MathUtils
     {
-        public static int MDC(int a, int b)
+        public static int GCD(int a, int b)
         {
             while (b > 0)
             {
