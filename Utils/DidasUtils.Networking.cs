@@ -119,7 +119,7 @@ namespace DidasUtils.Networking
             }
 
 
-            public RecievedMessageCallback recievedMessageCallback { private get; set; }
+            public RecievedMessageCallback recievedMessageCallback { get; set; }
             public ConnectionChangeCallback clientConnectedCallback { private get; set; }
             public ConnectionChangeCallback clientDisconnectedCallback { private get; set; }
             public ServerLoopCallback serverLoopCallback { private get; set; }
