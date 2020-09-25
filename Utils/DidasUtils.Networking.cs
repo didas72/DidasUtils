@@ -23,11 +23,11 @@ namespace DidasUtils.Networking
             private Thread clientReadThread;
 
 
-            public RecievedMessageCallback recievedMessageCallback;
+            public RecievedMessageCallback recievedMessageCallback { set; private get; }
 
 
             private bool checkingRead = false;
-            public string messageEndExpression { get; set; }
+            public string messageEndExpression { get; set; } = "!EOM";
 
 
             public ConnectionClient()
@@ -42,6 +42,7 @@ namespace DidasUtils.Networking
 
             public void Connect(string ip, int port)
             {
+                clientSocket.Close();
                 clientSocket.Connect(ip, port);
             }
             public void StartRead(RecievedMessageCallback callback)
@@ -57,7 +58,7 @@ namespace DidasUtils.Networking
             {
                 checkingRead = false;
             }
-            public void RecieveLoop()
+            private void RecieveLoop()
             {
                 while (checkingRead)
                 {
