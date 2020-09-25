@@ -23,7 +23,7 @@ namespace DidasUtils.Networking
             private Thread clientReadThread;
 
 
-            public RecievedMessageCallback recievedMessageCallback { set; private get; }
+            private RecievedMessageCallback recievedMessageCallback;
 
 
             private bool checkingRead = false;
@@ -119,10 +119,10 @@ namespace DidasUtils.Networking
             }
 
 
-            public RecievedMessageCallback recievedMessageCallback { get; set; }
-            public ConnectionChangeCallback clientConnectedCallback { get; set; }
-            public ConnectionChangeCallback clientDisconnectedCallback { get; set; }
-            public ServerLoopCallback serverLoopCallback { get; set; }
+            public RecievedMessageCallback recievedMessageCallback { private get; set; }
+            public ConnectionChangeCallback clientConnectedCallback { private get; set; }
+            public ConnectionChangeCallback clientDisconnectedCallback { private get; set; }
+            public ServerLoopCallback serverLoopCallback { private get; set; }
 
 
             private Thread serverLoopThread;
