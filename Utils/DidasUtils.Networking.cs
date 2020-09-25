@@ -331,7 +331,7 @@ namespace DidasUtils.Networking
 
 
 
-        private class Client
+        public class Client
         {
             public int id;
             public TcpClient clientSocket;
