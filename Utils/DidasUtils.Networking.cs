@@ -190,7 +190,7 @@ namespace DidasUtils.Networking
                 serverAcceptConnectionThread = new Thread(AcceptConnectionLoop);
                 serverAcceptConnectionThread.Start();
             }
-            public void AcceptConnectionLoop()
+            private void AcceptConnectionLoop()
             {
                 while (acceptingConnections)
                 {
@@ -243,40 +243,9 @@ namespace DidasUtils.Networking
                 networkStream.Write(sendBytes, 0, sendBytes.Length);
                 networkStream.Flush();
             }
-            private string ReadMessage(TcpClient socket)
-            {
-                NetworkStream networkStream = socket.GetStream();
-
-                byte[] recievedBytes = new byte[socket.ReceiveBufferSize];
-
-                networkStream.Read(recievedBytes, 0, socket.ReceiveBufferSize);
-
-                string recievedString = Encoding.ASCII.GetString(recievedBytes);
-
-                if (!recievedString.Contains(messageEndExpression))
-                {
-                    throw new MessageWithNoTerminatorException();
-                }
-
-                recievedString = recievedString.Substring(0, recievedString.LastIndexOf(messageEndExpression));
-
-                return recievedString;
-            }
 
 
 
-            public int AcceptConnection(TcpClient socket)
-            {
-                clientIdCounter++;
-
-                Client client = new Client(socket, clientIdCounter, this);
-
-                clients.Add(clientIdCounter, client);
-
-                clientConnectedCallback.Invoke(socket);
-
-                return clientIdCounter;
-            }
             public int AcceptConnection()
             {
                 clientIdCounter++;
@@ -287,6 +256,18 @@ namespace DidasUtils.Networking
                 clients.Add(clientIdCounter, client);
 
                 clientConnectedCallback.Invoke(clientSocket);
+
+                return clientIdCounter;
+            }
+            public int AcceptConnection(TcpClient socket)
+            {
+                clientIdCounter++;
+
+                Client client = new Client(socket, clientIdCounter, this);
+
+                clients.Add(clientIdCounter, client);
+
+                clientConnectedCallback.Invoke(socket);
 
                 return clientIdCounter;
             }
