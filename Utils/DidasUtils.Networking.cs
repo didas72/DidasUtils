@@ -226,7 +226,7 @@ namespace DidasUtils.Networking
 
                 foreach (KeyValuePair<int, Client> pair in clients)
                 {
-                    pair.Value.KILL_THE_DAMN_PROCESS_FUCKS_SAKE();
+                    pair.Value.StopClientThread();
                 }
             }
             
@@ -315,11 +315,11 @@ namespace DidasUtils.Networking
 
         public class Client
         {
-            public int id;
-            public TcpClient clientSocket;
-            private ConnectionServer parentServer;
+            public int id { get; private set; }
+            public TcpClient clientSocket { get; private set; }
+            private ConnectionServer parentServer { set; get; }
 
-            public Thread clientThread;
+            public Thread clientThread { get; set; }
 
             public Client(TcpClient socket, int Id, ConnectionServer server)
             {
@@ -333,7 +333,7 @@ namespace DidasUtils.Networking
             }
 
             [SecurityPermissionAttribute(SecurityAction.Demand, ControlThread = true)]
-            public void KILL_THE_DAMN_PROCESS_FUCKS_SAKE()
+            public void StopClientThread()
             {
                 clientThread.Abort();
             }
@@ -363,7 +363,7 @@ namespace DidasUtils.Networking
                 }
             }
 
-            static string ReadMessage(TcpClient socket)
+            string ReadMessage(TcpClient socket)
             {
                 NetworkStream networkStream = socket.GetStream();
 
