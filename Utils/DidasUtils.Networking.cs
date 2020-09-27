@@ -363,7 +363,7 @@ namespace DidasUtils.Networking
                 }
             }
 
-            string ReadMessage(TcpClient socket)
+            static string ReadMessage(TcpClient socket)
             {
                 NetworkStream networkStream = socket.GetStream();
 
