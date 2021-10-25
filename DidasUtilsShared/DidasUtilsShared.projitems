@@ -11,10 +11,12 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUIDrawer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUIEmpty.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUISelectable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUIWindow.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUIElement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUIPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUIText.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\ICUIInteractable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\SegmentedData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ExtensionMethods.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Files\Logging.cs" />

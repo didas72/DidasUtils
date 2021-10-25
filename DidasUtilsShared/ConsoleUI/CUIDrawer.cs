@@ -14,7 +14,7 @@ namespace DidasUtils.ConsoleUI
         public static Vector2i ConsoleSize { get => consoleSize; set
             {
                 consoleSize = value;
-                Console.SetWindowSize(consoleSize.x + 1, consoleSize.y + 1);
+                Console.SetWindowSize(consoleSize.x, consoleSize.y);
                 Console.SetBufferSize(consoleSize.x + 1, consoleSize.y + 1);
             } }
 
@@ -34,8 +34,6 @@ namespace DidasUtils.ConsoleUI
         {
             Clear();
 
-
-
             foreach (CUIWindow window in Windows)
             {
                 window.Draw();
@@ -44,13 +42,7 @@ namespace DidasUtils.ConsoleUI
         private static void Clear()
         {
             Console.BackgroundColor = ConsoleColor.Cyan;
-            string clear = " ".Loop((consoleSize.x + 1) * (consoleSize.y + 1));
-            Console.SetCursorPosition(0, 0);
-            Console.Write(clear);
-            return;
-            Console.BackgroundColor = ConsoleColor.Gray;
-            clear = " ".Loop(consoleSize.x);
-            Console.Write(clear);
+            Console.Clear();
         }
 
 

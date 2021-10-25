@@ -9,10 +9,9 @@ namespace DidasUtils.ConsoleUI
 {
     public class CUIWindow
     {
-        public List<CUIPage> Pages { get; }
+        private List<CUIPage> Pages;
         public Vector2i WindowPos { get; private set; }
         public Vector2i WindowSize { get; private set; }
-        public ConsoleColor Background { get; set; }
         public ConsoleColor TabForegroundColor { get; set; }
         public ConsoleColor TabBackgroundColor { get; set; }
         public ConsoleColor SelTabForegroundColor { get; set; }
@@ -30,6 +29,7 @@ namespace DidasUtils.ConsoleUI
         public CUIWindow(Vector2i size, Vector2i position)
         {
             Pages = new List<CUIPage>();
+
             WindowSize = size;
             WindowPos = position;
             selectedPage = 0;
@@ -39,28 +39,60 @@ namespace DidasUtils.ConsoleUI
             SelTabBackgroundColor = ConsoleColor.DarkGreen;
             SelTabForegroundColor = ConsoleColor.White;
             TabSepBackgroundColor = ConsoleColor.Black;
-            TabSepForegroundColor = ConsoleColor.Black; 
+            TabSepForegroundColor = ConsoleColor.Black;
         }
 
 
 
-        public void SelectPrevTab() => selectedPage--;
-        public void SelectNextTab() => selectedPage++;
+        public void SelectPrevTab()
+        {
+            selectedPage--;
+            ReclampSelectedPage();
+        }
+        public void SelectNextTab()
+        {
+            selectedPage++;
+            ReclampSelectedPage();
+        }
+
+        public void SelectNextInteractable()
+        {
+            if (!TryGetValidPage(selectedPage, out CUIPage page))
+                return;
+
+            page.SelectNextInteractable();
+        }
+        public void SelectPrevInteractable()
+        {
+            if (!TryGetValidPage(selectedPage, out CUIPage page))
+                return;
+
+            page.SelectPrevInteractable();
+        }
+        public void Interact(ConsoleKeyInfo keyInfo)
+        {
+            if (!TryGetValidPage(selectedPage, out CUIPage page))
+                return;
+
+            page.Interact(keyInfo);
+        }
+
+
+
+        public void AddPage(CUIPage page) => Pages.Add(page);
 
 
 
         public void Draw()
         {
-            if (Pages.Count <= 0)
-                throw new NoPagesException();
-
-            if (selectedPage < 0)
-                selectedPage = Pages.Count - 1;
-            else if (selectedPage >= Pages.Count)
-                selectedPage = 0;
+            if (!TryGetValidPage(selectedPage, out CUIPage page))
+            {
+                CUIDrawer.DrawLocal(this, "No pages.", ConsoleColor.White, ConsoleColor.Black, Vector2i.Zero);
+                return;
+            }
 
             DrawPageTabs();
-            DrawPage();
+            DrawPage(page);
         }
         private void DrawPageTabs()
         {
@@ -150,39 +182,87 @@ namespace DidasUtils.ConsoleUI
                 }
             }
         }
-        private void DrawPage()
+        private void DrawPage(CUIPage page)
         {
-            for (int i = 0; i < Pages[selectedPage].Elements.Count; i++)
+            CUIElement[] elements = page.GetElements();
+
+            for (int i = 0; i < elements.Length; i++)
             {
                 try
                 {
-                    CUIElement element = Pages[selectedPage].Elements[i];
-                    Vector2i off = new Vector2i(0, 1);
+                    CUIElement element = elements[i];
+                    Vector2i offset = new Vector2i(0, 1);
 
-                    switch (element.Type)
-                    {
-                        case CUIElement.ElementType.Empty:
-                            CUIEmpty empty = (CUIEmpty)element;
-
-                            string clear = " \n".Loop(empty.Size.y);
-                            CUIDrawer.DrawLocal(this, clear, ConsoleColor.White, empty.Color, empty.Position + off, empty.Size);
-                            break;
-
-                        case CUIElement.ElementType.Text:
-                            CUIText text = (CUIText)element;
-
-                            CUIDrawer.DrawLocal(this, text.Content, text.ForegroundColor, text.BackgroundColor, text.Position + off);
-                            break;
-
-                        default:
-                            break;
-                    }
+                    DrawElement(element, offset);
                 }
-                catch (Exception e)
-                {
-                    throw e;
-                }
+                catch { }
             }
+        }
+        private void DrawElement(CUIElement element, Vector2i offset)
+        {
+            bool isSelectedInteractable = false;
+
+            if (element is ICUIInteractable interactable)
+            {
+                Pages[selectedPage].TryGetSelectedInteractable(out ICUIInteractable selectedInteractable);
+
+                if (interactable == selectedInteractable)
+                    isSelectedInteractable = true;
+            }
+
+            switch (element.Type)
+            {
+                case CUIElement.ElementType.Empty:
+                    CUIEmpty empty = (CUIEmpty)element;
+
+                    string clear = " \n".Loop(empty.Size.y);
+                    CUIDrawer.DrawLocal(this, clear, ConsoleColor.White, empty.Color, empty.Position + offset, empty.Size);
+                    break;
+
+                case CUIElement.ElementType.Text:
+                    CUIText text = (CUIText)element;
+
+                    CUIDrawer.DrawLocal(this, text.Content, text.ForegroundColor, text.BackgroundColor, text.Position + offset, text.Size);
+                    break;
+
+                case CUIElement.ElementType.Selectable:
+                    CUISelectable selectable = (CUISelectable)element;
+
+                    if (!isSelectedInteractable)
+                        CUIDrawer.DrawLocal(this, selectable.Content, selectable.ForegroundColor, selectable.BackgroundColor, selectable.Position + offset, selectable.Size);
+                    else
+                        CUIDrawer.DrawLocal(this, selectable.Content, selectable.SelForegroundColor, selectable.SelBackgroundColor, selectable.Position + offset, selectable.Size);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+
+
+        private bool TryGetValidPage(int index, out CUIPage page)
+        {
+            page = null;
+
+            if (Pages.Count <= 0)
+                return false;
+
+            if (index < 0)
+                index = Pages.Count - 1;
+            else if (selectedPage >= Pages.Count)
+                index = 0;
+
+            page = Pages[index];
+
+            return true;
+        }
+        private void ReclampSelectedPage()
+        {
+            if (selectedPage < 0)
+                selectedPage = Pages.Count - 1;
+            else if (selectedPage >= Pages.Count)
+                selectedPage = 0;
         }
     }
 

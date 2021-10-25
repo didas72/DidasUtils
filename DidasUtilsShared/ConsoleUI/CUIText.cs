@@ -12,6 +12,16 @@ namespace DidasUtils.ConsoleUI
 
 
 
+        public CUIText(Vector2i position, string content)
+        {
+            //a weird bug makes this return all 0s or null if I inline it and call a diff constructor, so here this is... :/
+            Type = ElementType.Text;
+            Position = position;
+            Size = new Vector2i(-1, -1);
+            ForegroundColor = ConsoleColor.White;
+            BackgroundColor = ConsoleColor.Black;
+            Content = content;
+        }
         public CUIText(Vector2i position, Vector2i size) => new CUIText(position, size, string.Empty);
         public CUIText(Vector2i position, Vector2i size, string content)
         {

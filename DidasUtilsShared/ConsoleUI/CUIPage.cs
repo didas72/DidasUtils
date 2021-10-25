@@ -6,55 +6,77 @@ namespace DidasUtils.ConsoleUI
     public class CUIPage
     {
         public string Title { get; private set; }
-        public List<CUIElement> Elements { get; }
+        private List<CUIElement> Elements;
+        private List<ICUIInteractable> Interactables;
+
+
+
+        private int selectedInteractable;
 
 
 
         public CUIPage(string title)
         {
             Title = title;
+
             Elements = new List<CUIElement>();
+            Interactables = new List<ICUIInteractable>();
         }
 
 
 
-        public void AddElement(CUIElement element) => Elements.Add(element);
-
-
-
-        /*public void Draw()
+        public void AddElement(CUIElement element)
         {
-            for (int i = 0; i < Elements.Count; i++)
-            {
-                try
-                {
-                    switch (Elements[i].Type)
-                    {
-                        case CUIElement.ElementType.Empty:
-                            break;
+            Elements.Add(element);
 
-                        case CUIElement.ElementType.Text:
-                            CUIText text = (CUIText)Elements[i];
+            if (element is ICUIInteractable interactable) Interactables.Add(interactable);
+        }
 
-                            Console.BackgroundColor = text.BackgroundColor;
-                            Console.ForegroundColor = text.ForegroundColor;
+        
 
-                            Console.CursorTop = text.Position.y + 1;
-                            Console.CursorLeft = text.Position.x;
+        public void SelectNextInteractable()
+        {
+            selectedInteractable++;
 
-                            int len = Mathf.Clamp(Console.WindowWidth - Console.CursorLeft, 0, text.Content.Length);
-                            Console.Write(text.Content.Substring(0, len));
-                            break;
+            if (!TryGetSelectedInteractable(out ICUIInteractable interactable))
+                return;
 
-                        default:
-                            break;
-                    }
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
-            }
-        }*/
+            interactable.Select();
+        }
+        public void SelectPrevInteractable()
+        {
+            selectedInteractable--;
+
+            if (!TryGetSelectedInteractable(out ICUIInteractable interactable))
+                return;
+
+            interactable.Select();
+        }
+        public void Interact(ConsoleKeyInfo keyInfo)
+        {
+            if (!TryGetSelectedInteractable(out ICUIInteractable interactable)) return;
+
+            interactable.Interact(keyInfo);
+        }
+
+
+
+        public CUIElement[] GetElements() => Elements.ToArray();
+        public bool TryGetSelectedInteractable(out ICUIInteractable interactable)
+        {
+            interactable = null;
+
+            if (Interactables.Count <= 0)
+                return false;
+
+            if (selectedInteractable < 0)
+                selectedInteractable = Interactables.Count - 1;
+            else if (selectedInteractable >= Interactables.Count)
+                selectedInteractable = 0;
+
+            interactable = Interactables[selectedInteractable];
+
+            return true;
+        }
     }
 }
