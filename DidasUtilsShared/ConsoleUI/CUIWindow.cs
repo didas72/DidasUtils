@@ -234,6 +234,16 @@ namespace DidasUtils.ConsoleUI
                         CUIDrawer.DrawLocal(this, selectable.Content, selectable.SelForegroundColor, selectable.SelBackgroundColor, selectable.Position + offset, selectable.Size);
                     break;
 
+                case CUIElement.ElementType.Input:
+                    CUIInput input = (CUIInput)element;
+
+                    if (!isSelectedInteractable)
+                        CUIDrawer.DrawLocal(this, input.Content, input.ForegroundColor, input.BackgroundColor, input.Position + offset, input.Size);
+                    else
+
+                        CUIDrawer.DrawLocal(this, input.Content, input.SelForegroundColor, input.SelBackgroundColor, input.Position + offset, input.Size);
+                    break;
+
                 default:
                     break;
             }

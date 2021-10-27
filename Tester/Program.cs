@@ -33,7 +33,7 @@ namespace Tester
                     window.SelectNextInteractable();
                 else if (key.Key == ConsoleKey.UpArrow)
                     window.SelectPrevInteractable();
-                else if (key.Key == ConsoleKey.Enter)
+                else
                     window.Interact(key);
 
                 CUIDrawer.DrawWindows();
@@ -65,6 +65,10 @@ namespace Tester
             sel.OnInteract += OnInteractedExit;
             page.AddElement(sel);
 
+            CUIInput inp = new CUIInput(new Vector2i(0, 12), new Vector2i(20, 1), "");
+            inp.OnInteract += OnInteractedInput;
+            page.AddElement(inp);
+
             window.AddPage(page);
             window.AddPage(new CUIPage("Page 2"));
             window.AddPage(new CUIPage("Page 3"));
@@ -87,6 +91,17 @@ namespace Tester
         private static void OnInteractedExit(object sender, InteractEventArgs e)
         {
             run = false;
+        }
+        private static int c = 0;
+        private static void OnInteractedInput(object sender, InteractEventArgs e)
+        {
+            ahahah
+            c++;
+
+            //thing no render when content is empty
+
+            if (c >= 3)
+                throw new Exception(e.arguments[0]);
         }
     }
 }
