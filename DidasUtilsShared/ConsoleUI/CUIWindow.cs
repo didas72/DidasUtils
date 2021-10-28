@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 using DidasUtils;
 using DidasUtils.Extensions;
@@ -9,7 +10,8 @@ namespace DidasUtils.ConsoleUI
 {
     public class CUIWindow
     {
-        private List<CUIPage> Pages;
+        private readonly List<CUIPage> Pages;
+        public ReadOnlyCollection<CUIPage> RPages { get => Pages.AsReadOnly(); }
         public Vector2i WindowPos { get; private set; }
         public Vector2i WindowSize { get; private set; }
         public ConsoleColor TabForegroundColor { get; set; }

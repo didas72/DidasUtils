@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 using DidasUtils;
 using DidasUtils.Extensions;
@@ -9,7 +10,8 @@ namespace DidasUtils.ConsoleUI
 {
     public static class CUIDrawer
     {
-        public static List<CUIWindow> Windows { get; private set; }
+        private static List<CUIWindow> Windows;
+        public static ReadOnlyCollection<CUIWindow> RWindows { get => Windows.AsReadOnly(); }
         private static Vector2i consoleSize;
         public static Vector2i ConsoleSize { get => consoleSize; set
             {
@@ -63,7 +65,7 @@ namespace DidasUtils.ConsoleUI
             Console.BackgroundColor = backgroundColor;
             Console.ForegroundColor = foregroundColor;
 
-            string[] lines = content.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] lines = content.Trim('\n').Split('\n');
 
             for (int i = 0; i < lines.Length; i++)
             {

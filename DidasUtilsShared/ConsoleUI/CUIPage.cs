@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace DidasUtils.ConsoleUI
 {
     public class CUIPage
     {
         public string Title { get; private set; }
-        private List<CUIElement> Elements;
-        private List<ICUIInteractable> Interactables;
+        public ReadOnlyCollection<CUIElement> RElements { get => Elements.AsReadOnly(); }
+        public ReadOnlyCollection<ICUIInteractable> RInteractables { get => Interactables.AsReadOnly(); }
+        private readonly List<CUIElement> Elements;
+        private readonly List<ICUIInteractable> Interactables;
 
 
 

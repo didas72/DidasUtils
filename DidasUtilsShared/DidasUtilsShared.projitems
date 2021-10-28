@@ -11,7 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUIDrawer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUIEmpty.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUIInput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUIInupt.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUISelectable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUIWindow.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUIElement.cs" />

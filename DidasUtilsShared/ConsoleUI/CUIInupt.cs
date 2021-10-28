@@ -49,10 +49,14 @@ namespace DidasUtils.ConsoleUI
 
         public void Interact(ConsoleKeyInfo keyInfo)
         {
-            if (!string.IsNullOrWhiteSpace(keyInfo.KeyChar.ToString()))
+            if (keyInfo.Key == ConsoleKey.Backspace && Content.Length > 0)
+                Content = Content.Substring(0, Content.Length - 1);
+            else if (keyInfo.KeyChar == ' ')
+                Content += ' ';
+            else if (!string.IsNullOrWhiteSpace(keyInfo.KeyChar.ToString()))
                 Content += keyInfo.KeyChar;
 
-            InteractEventArgs e = new InteractEventArgs(Type, new string[] { Content });
+            InteractEventArgs e = new InteractEventArgs(Type, new string[] { Content, keyInfo.KeyChar.ToString() });
 
             OnInteract?.Invoke(this, e);
         }

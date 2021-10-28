@@ -92,16 +92,25 @@ namespace Tester
         {
             run = false;
         }
-        private static int c = 0;
+
+        private static CUIText inpText = null;
+
         private static void OnInteractedInput(object sender, InteractEventArgs e)
         {
-            ahahah
-            c++;
-
-            //thing no render when content is empty
-
-            if (c >= 3)
-                throw new Exception(e.arguments[0]);
+            if (e.arguments[1] == "\n" || e.arguments[1] == "\r")
+            {
+                if (inpText == null)
+                {
+                    inpText = new CUIText(new Vector2i(0, 0), e.arguments[0]);
+                    CUIPage page = new CUIPage("Outp");
+                    page.AddElement(inpText);
+                    window.AddPage(page);
+                }
+                else
+                {
+                    inpText.SetContent(e.arguments[0]);
+                }
+            }
         }
     }
 }
