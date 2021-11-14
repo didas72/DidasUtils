@@ -9,6 +9,7 @@
     <Import_RootNamespace>DidasUtils</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ErrorCorrection\CheckSum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUIDrawer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUIEmpty.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUIInupt.cs" />
@@ -19,9 +20,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUIText.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\ICUIInteractable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\SegmentedData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ErrorCorrection\ErrorProtectedBlock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ExtensionMethods.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Files\Logging.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Files\SevenZip.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ErrorCorrection\Fletcher.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Mathf.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Net\Networking.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Net\TcpClient.cs" />
@@ -34,5 +37,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Extensions\" />
+    <Folder Include="$(MSBuildThisFileDirectory)ErrorCorrection\" />
   </ItemGroup>
 </Project>
