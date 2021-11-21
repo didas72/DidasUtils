@@ -68,7 +68,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleUI\CUIDrawer.cs" />
+    <Compile Include="ConsoleUI\CUIElement.cs" />
+    <Compile Include="ConsoleUI\CUIEmpty.cs" />
+    <Compile Include="ConsoleUI\CUIInupt.cs" />
+    <Compile Include="ConsoleUI\CUIPage.cs" />
+    <Compile Include="ConsoleUI\CUISelectable.cs" />
+    <Compile Include="ConsoleUI\CUIText.cs" />
+    <Compile Include="ConsoleUI\CUIWindow.cs" />
+    <Compile Include="ConsoleUI\ICUIInteractable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\SystemInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.config" />

@@ -10,15 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ErrorCorrection\CheckSum.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUIDrawer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUIEmpty.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUIInupt.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUISelectable.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUIWindow.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUIElement.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUIPage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\CUIText.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ConsoleUI\ICUIInteractable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\SegmentedData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ErrorCorrection\ErrorProtectedBlock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ExtensionMethods.cs" />
@@ -30,7 +21,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Net\TcpClient.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Numerics\Vector2i.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Numerics\Vector3i.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)System\SystemInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)inc\7za.exe" />

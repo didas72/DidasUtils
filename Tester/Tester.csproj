@@ -50,10 +50,11 @@
     <EmbeddedResource Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DidasUtils\DidasUtilsNF.csproj">
+    <ProjectReference Include="..\DidasUtilsNF\DidasUtilsNF.csproj">
       <Project>{39ab3f1d-0125-42b8-9d06-ff7fea0ded0c}</Project>
       <Name>DidasUtilsNF</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\DidasUtilsShared\DidasUtilsShared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
