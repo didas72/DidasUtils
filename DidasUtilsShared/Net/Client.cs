@@ -32,7 +32,7 @@ namespace DidasUtils.Net
         /// 
         /// </summary>
         /// <param name="message"></param>
-        public delegate void MessageReceived(byte[] message);
+        public delegate void MessageReceived(Client sender, byte[] message);
 
 
 
@@ -115,7 +115,7 @@ namespace DidasUtils.Net
                     {
                         byte[] buffer = SegmentedData.ReadFromStream(netStream, blockSize);
 
-                        messageReceived.BeginInvoke(buffer, null, this);
+                        messageReceived.BeginInvoke(this, buffer, null, this);
                     }
                 }
                 catch { }

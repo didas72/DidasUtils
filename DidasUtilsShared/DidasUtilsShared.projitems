@@ -19,7 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ErrorCorrection\Fletcher.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Mathf.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Net\Networking.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Net\TcpClient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Net\Client.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Numerics\Vector2i.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Numerics\Vector3i.cs" />
   </ItemGroup>
