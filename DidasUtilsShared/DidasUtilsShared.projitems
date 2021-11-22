@@ -14,6 +14,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ErrorCorrection\ErrorProtectedBlock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ExtensionMethods.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Files\Logging.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Files\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Files\SevenZip.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ErrorCorrection\Fletcher.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Mathf.cs" />
