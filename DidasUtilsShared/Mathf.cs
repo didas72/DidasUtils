@@ -118,5 +118,10 @@ namespace DidasUtils
 
 			return value < min ? min : value;
 		}
+
+
+
+		public static double DegToRad(double angle) => angle * Math.PI / 180;
+		public static double RadToDeg(double angle) => angle * 180 / Math.PI;
 	}
 }
