@@ -13,7 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Data\SegmentedData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ErrorCorrection\ErrorProtectedBlock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ExtensionMethods.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Files\Logging.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Logging.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Files\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Files\SevenZip.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ErrorCorrection\Fletcher.cs" />
