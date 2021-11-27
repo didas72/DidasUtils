@@ -19,7 +19,7 @@ namespace DidasUtils.Logging
         /// </summary>
         public static string LogFile { get; private set; }
 
-        public static bool UsePrint { get; private set; } = true;
+        public static bool UsePrint { get; set; } = true;
 
 
 
