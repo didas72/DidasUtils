@@ -161,5 +161,10 @@ namespace DidasUtils.Extensions
             usedBits = self.Count;
             return ret;
         }
+        public static T NextEnum<T>(this Random rdm)
+        {
+            Array v = Enum.GetValues(typeof(T));
+            return (T)v.GetValue(rdm.Next(v.Length));
+        }
     }
 }
