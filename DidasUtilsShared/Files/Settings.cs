@@ -53,22 +53,6 @@ namespace DidasUtils.Files
 
 
         /// <summary>
-        /// Attempts to get a setting from the document.
-        /// </summary>
-        /// <param name="key">The name of the setting.</param>
-        /// <param name="value">The value, if it exists.</param>
-        /// <returns></returns>
-        public bool TryGetValue(string key, out string value)
-        {
-            return settings.TryGetValue(key, out value);
-        }
-        /// <summary>
-        /// Gets the setting from the document, throwing an exception if the setting is not present.
-        /// </summary>
-        /// <param name="key">The name of the setting.</param>
-        /// <returns></returns>
-        public string GetValue(string key) => settings[key];
-        /// <summary>
         /// Checks if the document contains a given setting.
         /// </summary>
         /// <param name="key">The name of the setting.</param>
@@ -121,12 +105,6 @@ namespace DidasUtils.Files
 
 
         /// <summary>
-        /// Sets the value of a setting.
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        public void SetValue(string key, string value) => settings[key] = value;
-        /// <summary>
         /// Attempts to set the value of the setting. Returns success state.
         /// </summary>
         /// <param name="key"></param>
@@ -142,6 +120,139 @@ namespace DidasUtils.Files
 
             return true;
         }
+        /// <summary>
+        /// Sets the value of a setting.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public void SetValue(string key, string value) => settings[key] = value;
+        /// <summary>
+        /// Sets the value of a setting.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public void SetValue(string key, sbyte value) => settings[key] = value.ToString();
+        /// <summary>
+        /// Sets the value of a setting.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public void SetValue(string key, byte value) => settings[key] = value.ToString();
+        /// <summary>
+        /// Sets the value of a setting.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public void SetValue(string key, short value) => settings[key] = value.ToString();
+        /// <summary>
+        /// Sets the value of a setting.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public void SetValue(string key, ushort value) => settings[key] = value.ToString();
+        /// <summary>
+        /// Sets the value of a setting.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public void SetValue(string key, int value) => settings[key] = value.ToString();
+        /// <summary>
+        /// Sets the value of a setting.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public void SetValue(string key, uint value) => settings[key] = value.ToString();
+        /// <summary>
+        /// Sets the value of a setting.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public void SetValue(string key, long value) => settings[key] = value.ToString();
+        /// <summary>
+        /// Sets the value of a setting.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public void SetValue(string key, ulong value) => settings[key] = value.ToString();
+        /// <summary>
+        /// Sets the value of a setting.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public void SetValue(string key, bool value) => settings[key] = value.ToString();
+
+
+
+        /// <summary>
+        /// Attempts to get a setting from the document.
+        /// </summary>
+        /// <param name="key">The name of the setting.</param>
+        /// <param name="value">The value, if it exists.</param>
+        /// <returns></returns>
+        public bool TryGetValue(string key, out string value)
+        {
+            return settings.TryGetValue(key, out value);
+        }
+        /// <summary>
+        /// Gets the setting from the document, throwing an exception if the setting is not present.
+        /// </summary>
+        /// <param name="key">The name of the setting.</param>
+        /// <returns></returns>
+        public string GetString(string key) => settings[key];
+        /// <summary>
+        /// Gets the setting from the document, throwing an exception if the setting is not present.
+        /// </summary>
+        /// <param name="key">The name of the setting.</param>
+        /// <returns></returns>
+        public sbyte GetSBytes(string key) => sbyte.Parse(settings[key]);
+        /// <summary>
+        /// Gets the setting from the document, throwing an exception if the setting is not present.
+        /// </summary>
+        /// <param name="key">The name of the setting.</param>
+        /// <returns></returns>
+        public byte GetByte(string key) => byte.Parse(settings[key]);
+        /// <summary>
+        /// Gets the setting from the document, throwing an exception if the setting is not present.
+        /// </summary>
+        /// <param name="key">The name of the setting.</param>
+        /// <returns></returns>
+        public short GetShort(string key) => short.Parse(settings[key]);
+        /// <summary>
+        /// Gets the setting from the document, throwing an exception if the setting is not present.
+        /// </summary>
+        /// <param name="key">The name of the setting.</param>
+        /// <returns></returns>
+        public ushort GetUShort(string key) => ushort.Parse(settings[key]);
+        /// <summary>
+        /// Gets the setting from the document, throwing an exception if the setting is not present.
+        /// </summary>
+        /// <param name="key">The name of the setting.</param>
+        /// <returns></returns>
+        public int GetInt(string key) => int.Parse(settings[key]);
+        /// <summary>
+        /// Gets the setting from the document, throwing an exception if the setting is not present.
+        /// </summary>
+        /// <param name="key">The name of the setting.</param>
+        /// <returns></returns>
+        public uint GetUInt(string key) => uint.Parse(settings[key]);
+        /// <summary>
+        /// Gets the setting from the document, throwing an exception if the setting is not present.
+        /// </summary>
+        /// <param name="key">The name of the setting.</param>
+        /// <returns></returns>
+        public long GetLong(string key) => long.Parse(settings[key]);
+        /// <summary>
+        /// Gets the setting from the document, throwing an exception if the setting is not present.
+        /// </summary>
+        /// <param name="key">The name of the setting.</param>
+        /// <returns></returns>
+        public ulong GetULong(string key) => ulong.Parse(settings[key]);
+        /// <summary>
+        /// Gets the setting from the document, throwing an exception if the setting is not present.
+        /// </summary>
+        /// <param name="key">The name of the setting.</param>
+        /// <returns></returns>
+        public bool GetBool(string key) => bool.Parse(settings[key]);
 
 
 

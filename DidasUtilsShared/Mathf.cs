@@ -121,7 +121,17 @@ namespace DidasUtils
 
 
 
+		/// <summary>
+		/// Converts degrees to radians.
+		/// </summary>
+		/// <param name="angle"></param>
+		/// <returns></returns>
 		public static double DegToRad(double angle) => angle * Math.PI / 180;
+		/// <summary>
+		/// Converts radians to degrees.
+		/// </summary>
+		/// <param name="angle"></param>
+		/// <returns></returns>
 		public static double RadToDeg(double angle) => angle * 180 / Math.PI;
 	}
 }
