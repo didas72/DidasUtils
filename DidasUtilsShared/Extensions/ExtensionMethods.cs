@@ -191,5 +191,15 @@ namespace DidasUtils.Extensions
             Array v = Enum.GetValues(typeof(T));
             return (T)v.GetValue(rdm.Next(v.Length));
         }
+        /// <summary>
+        /// Enqueues a range of items.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="queue"></param>
+        /// <param name="items"></param>
+        public static void EnqueueRange<T>(this Queue<T> queue, T[] items)
+        {
+            foreach (T item in items) queue.Enqueue(item);
+        }
     }
 }
