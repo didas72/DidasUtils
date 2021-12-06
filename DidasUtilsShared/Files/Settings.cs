@@ -121,6 +121,31 @@ namespace DidasUtils.Files
 
 
         /// <summary>
+        /// Sets the value of a setting.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public void SetValue(string key, string value) => settings[key] = value;
+        /// <summary>
+        /// Attempts to set the value of the setting. Returns success state.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public bool TrySetValue(string key, string value)
+        {
+            try
+            {
+                settings[key] = value;
+            }
+            catch { return false; }
+
+            return true;
+        }
+
+
+
+        /// <summary>
         /// Converts the settings document to a string.
         /// </summary>
         /// <returns></returns>

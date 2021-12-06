@@ -22,6 +22,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Net\Client.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Numerics\Vector2i.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Numerics\Vector3i.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)inc\7za.exe" />

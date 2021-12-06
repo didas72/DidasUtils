@@ -5,6 +5,9 @@ using System.Reflection;
 
 namespace DidasUtils
 {
+    /// <summary>
+    /// Class that contains several genereral-purpose methods.
+    /// </summary>
     public static class Utils
     {
         /// <summary>
@@ -12,12 +15,6 @@ namespace DidasUtils
         /// </summary>
         /// <param name="directory">The full path of the directory to be checked.</param>
         /// <returns>Array containing the full paths of every file found.</returns>
-        /// <exception cref="IOException"></exception>
-        /// <exception cref="UnauthorizedAccessException"></exception>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="PathTooLongException"></exception>
-        /// <exception cref="DirectoryNotFoundException"></exception>
         public static string[] GetSubFiles(string directory) => GetSubFiles(directory, string.Empty);
         /// <summary>
         /// Gets all files in the given directory and it's subdirectories that match the given search pattern.
@@ -25,12 +22,6 @@ namespace DidasUtils
         /// <param name="directory"></param>
         /// <param name="searchPattern"></param>
         /// <returns>Array containing the full paths of every file found.</returns>
-        /// <exception cref="IOException"></exception>
-        /// <exception cref="UnauthorizedAccessException"></exception>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="PathTooLongException"></exception>
-        /// <exception cref="DirectoryNotFoundException"></exception>
         public static string[] GetSubFiles(string directory, string searchPattern)
         {
             List<string> files = new List<string>();
@@ -58,12 +49,6 @@ namespace DidasUtils
         /// <param name="directory"></param>
         /// <param name="searchPattern"></param>
         /// <returns>Array containing the full paths of every file found.</returns>
-        /// <exception cref="IOException"></exception>
-        /// <exception cref="UnauthorizedAccessException"></exception>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="PathTooLongException"></exception>
-        /// <exception cref="DirectoryNotFoundException"></exception>
         public static string[] GetSubFilesSorted(string directory, string searchPattern)
         {
             List<string> files = new List<string>();
@@ -83,9 +68,6 @@ namespace DidasUtils
         /// </summary>
         /// <param name="filenames">The paths to sort by filename.</param>
         /// <returns>Sorted paths array.</returns>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="FormatException"></exception>
-        /// <exception cref="OverflowException"></exception>
         public static string[] SortFiles(string[] filenames)
         {
             Dictionary<ulong, string> files = new Dictionary<ulong, string>();
@@ -117,9 +99,6 @@ namespace DidasUtils
         /// </summary>
         /// <param name="dirnames">The paths to sort by directory name.</param>
         /// <returns>Sorted paths array.</returns>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="FormatException"></exception>
-        /// <exception cref="OverflowException"></exception>
         public static string[] SortDirs(string[] dirnames)
         {
             Dictionary<ulong, string> dirs = new Dictionary<ulong, string>();
@@ -161,16 +140,6 @@ namespace DidasUtils
 
 
         /// <summary>
-        /// Waits for a key to be pressed while in console.
-        /// </summary>
-        public static void WaitForKey()
-        {
-            Console.ReadKey(true);
-        }
-
-
-
-        /// <summary>
         /// Formats a size, in bytes, to a smaller, humanely readable value with two decimal places.
         /// </summary>
         /// <param name="size">The size, in bytes, to format.</param>
@@ -185,6 +154,16 @@ namespace DidasUtils
             if (size < 1099511627776) return $"{(size / 1073741824f):N2}GB";
 
             return $"{(size / 1099511627776):N2}TB";
+        }
+
+
+
+        /// <summary>
+        /// Waits for a key to be pressed while in console.
+        /// </summary>
+        public static void WaitForKey()
+        {
+            Console.ReadKey(true);
         }
     }
 }

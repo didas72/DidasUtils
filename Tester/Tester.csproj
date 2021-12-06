@@ -55,6 +55,5 @@
       <Name>DidasUtilsNF</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\DidasUtilsShared\DidasUtilsShared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
