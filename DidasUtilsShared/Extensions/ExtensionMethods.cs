@@ -116,6 +116,12 @@ namespace DidasUtils.Extensions
 
             return false;
         }
+        /// <summary>
+        /// Gets the indexes of all matches of the given substring.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static int[] GetIndexesOf(this string str, string value)
         {
             List<int> outp = new List<int>();
@@ -132,7 +138,20 @@ namespace DidasUtils.Extensions
 
             return outp.ToArray();
         }
+        /// <summary>
+        /// Adds a KeyValuePair to a dictionary.
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
+        /// <param name="dictionary"></param>
+        /// <param name="pair"></param>
         public static void Add<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, KeyValuePair<TKey, TValue> pair) => dictionary.Add(pair.Key, pair.Value);
+        /// <summary>
+        /// Converts the List of bool to a byte array and outputs the number of used bits.
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="usedBits"></param>
+        /// <returns></returns>
         public static int[] ToIntArray(this List<bool> self, out int usedBits)
         {
             int[] ret = new int[Mathf.DivideRoundUp(self.Count, 32)];
@@ -161,6 +180,12 @@ namespace DidasUtils.Extensions
             usedBits = self.Count;
             return ret;
         }
+        /// <summary>
+        /// Gets a random but valid value from an enum.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="rdm"></param>
+        /// <returns></returns>
         public static T NextEnum<T>(this Random rdm)
         {
             Array v = Enum.GetValues(typeof(T));

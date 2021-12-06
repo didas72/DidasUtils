@@ -35,6 +35,11 @@ namespace DidasUtils.Net
 
 
 
+        /// <summary>
+        /// Checks wether a given URL is accessible.
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         public static bool IsUrlUp(string url)
         {
             HttpWebRequest request = WebRequest.CreateHttp(url);

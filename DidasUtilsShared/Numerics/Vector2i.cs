@@ -2,32 +2,98 @@
 
 namespace DidasUtils.Numerics
 {
+    /// <summary>
+    /// Integer Vector2
+    /// </summary>
     public readonly struct Vector2i
     {
+        /// <summary>
+        /// The x coordinate of the vector.
+        /// </summary>
         public readonly int x;
+        /// <summary>
+        /// The y coordinate of the vector.
+        /// </summary>
         public readonly int y;
-        public float Magnitude { get => (int)Math.Sqrt(x * x + y * y); }
+        /// <summary>
+        /// The length of the vector.
+        /// </summary>
+        public double Magnitude { get => Math.Sqrt(x * x + y * y); }
 
 
 
+        /// <summary>
+        /// Default 0,0 vector.
+        /// </summary>
         public static readonly Vector2i Zero = new Vector2i(0, 0);
 
 
 
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public Vector2i(int x, int y) { this.x = x; this.y = y; }
 
 
 
-        public static float DotProduct(Vector2i a, Vector2i b) => a.x * b.x + a.y * b.y;
-        public static float Angle(Vector2i a, Vector2i b) => (float)Math.Acos(DotProduct(a, b) / (a.Magnitude * b.Magnitude));
+        /// <summary>
+        /// Calculates the dot product between two vectors.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static double DotProduct(Vector2i a, Vector2i b) => a.x * b.x + a.y * b.y;
+        /// <summary>
+        /// Calculates the angle between two vectors.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static double Angle(Vector2i a, Vector2i b) => Math.Acos(DotProduct(a, b) / (a.Magnitude * b.Magnitude));
 
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
         public static Vector2i operator +(Vector2i a) => a;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
         public static Vector2i operator -(Vector2i a) => new Vector2i(-a.x, -a.y);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public static Vector2i operator +(Vector2i a, Vector2i b) => new Vector2i(a.x + b.x, a.y + b.y);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public static Vector2i operator -(Vector2i a, Vector2i b) => new Vector2i(a.x - b.x, a.y - b.y);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public static Vector2i operator *(Vector2i a, Vector2i b) => new Vector2i(a.x * b.x, a.y * b.y);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public static Vector2i operator /(Vector2i a, Vector2i b) => new Vector2i(a.x / b.x, a.y / b.y);
     }
 }

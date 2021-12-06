@@ -19,6 +19,9 @@ namespace DidasUtils.Logging
         /// </summary>
         public static string LogFile { get; private set; }
 
+        /// <summary>
+        /// Toggles wether the logs should be printed to the console.
+        /// </summary>
         public static bool UsePrint { get; set; } = true;
 
 
@@ -194,6 +197,12 @@ Start time {now.Hour}:{now.Minute}:{now.Second}
 
 
 
+        /// <summary>
+        /// Logs an exception with a message.
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public static void LogException(string msg, string sender, Exception e)
         {
             LogEvent(EventType.Error, $"{msg}\nException details:\n{e}", sender, false);

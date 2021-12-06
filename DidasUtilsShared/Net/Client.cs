@@ -29,8 +29,9 @@ namespace DidasUtils.Net
 
 
         /// <summary>
-        /// 
+        /// Callback delegate for when a message is received.
         /// </summary>
+        /// <param name="sender">The client that received the message.</param>
         /// <param name="message"></param>
         public delegate void MessageReceived(Client sender, byte[] message);
 
@@ -71,7 +72,7 @@ namespace DidasUtils.Net
 
 
         /// <summary>
-        /// Sends an <see cref="IMessage"/> thorugh the TcpClient.
+        /// Sends an byte array thorugh the TcpClient.
         /// </summary>
         /// <param name="message">The message to be sent.</param>
         /// <returns>Boolean indicating the operation's success.</returns>

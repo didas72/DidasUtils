@@ -2,12 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Authors>Didas72</Authors>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/didas72/DidasUtils</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>embedded</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <DocumentationFile>E:\dev\C#\DidasUtils\DidasUtils\DidasUtils.xml</DocumentationFile>
   </PropertyGroup>
 
   <Import Project="..\DidasUtilsShared\DidasUtilsShared.projitems" Label="Shared" />

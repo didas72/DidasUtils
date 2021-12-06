@@ -9,7 +9,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DidasUtilsShared", "DidasUt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DidasUtilsNF", "DidasUtilsNF\DidasUtilsNF.csproj", "{39AB3F1D-0125-42B8-9D06-FF7FEA0DED0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DidasUtils", "DidasUtils\DidasUtils.csproj", "{0F9D057F-C164-4046-A67F-ECF84FB58EFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DidasUtils", "DidasUtils\DidasUtils.csproj", "{0F9D057F-C164-4046-A67F-ECF84FB58EFA}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution

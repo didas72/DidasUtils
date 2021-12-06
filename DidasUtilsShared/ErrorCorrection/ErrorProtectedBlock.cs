@@ -2,10 +2,23 @@
 
 namespace DidasUtils.ErrorCorrection
 {
-    public class ErrorProtectedBlock
+    /// <summary>
+    /// Class the represents an error protected block of data.
+    /// </summary>
+    //TODO: Finish and make public
+    class ErrorProtectedBlock
     {
+        /// <summary>
+        /// Holds the data contained in the block.
+        /// </summary>
         public byte[] data;
+        /// <summary>
+        /// 
+        /// </summary>
         public byte[] errorProtection;
+        /// <summary>
+        /// The type of error protection used.
+        /// </summary>
         public ErrorProtectionType errorProtectionType;
 
 
@@ -36,10 +49,11 @@ namespace DidasUtils.ErrorCorrection
         }
         public static ErrorProtectedBlock Deserialize(byte[] bytes)
         {
-            ErrorProtectedBlock ret = new ErrorProtectedBlock();
-
-            ret.errorProtectionType = (ErrorProtectionType)bytes[0];
-            ret.data = new byte[BitConverter.ToUInt16(bytes, 1)];
+            ErrorProtectedBlock ret = new ErrorProtectedBlock
+            {
+                errorProtectionType = (ErrorProtectionType)bytes[0],
+                data = new byte[BitConverter.ToUInt16(bytes, 1)]
+            };
             Array.Copy(bytes, 3, ret.data, 0, ret.data.Length);
 
             int len = 0xff;
@@ -80,6 +94,17 @@ namespace DidasUtils.ErrorCorrection
             Array.Copy(bytes, 3 + ret.data.Length, ret.errorProtection, 0, len);
 
             return ret;
+        }
+
+
+
+        /// <summary>
+        /// [NOT IMPLEMENTED] Validates the data block.
+        /// </summary>
+        /// <returns></returns>
+        public bool Validate()
+        {
+            throw new NotImplementedException();
         }
 
 
