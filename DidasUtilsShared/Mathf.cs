@@ -2,7 +2,10 @@
 
 namespace DidasUtils
 {
-    public static class Mathf
+	/// <summary>
+	/// Class that contains several math-related methods.
+	/// </summary>
+	public static class Mathf
     {
 		/// <summary>
 		/// Calculates the rounded up quotient of an integer division.

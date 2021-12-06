@@ -273,10 +273,20 @@ namespace DidasUtils.Files
 
 
 
+        /// <summary>
+        /// Serializes a SettingsDocument to a file.
+        /// </summary>
+        /// <param name="set"></param>
+        /// <param name="path"></param>
         public static void Serialize(SettingsDocument set, string path)
         {
             File.WriteAllText(path, set.ToString());
         }
+        /// <summary>
+        /// Deserializes a SettingsDocument from a file.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static SettingsDocument Deserialize(string path) => new SettingsDocument(File.ReadAllText(path));
     }
 }
