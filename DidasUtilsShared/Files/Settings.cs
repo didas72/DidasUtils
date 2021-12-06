@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 using DidasUtils.Extensions;
 
@@ -269,5 +270,13 @@ namespace DidasUtils.Files
 
             return outp.TrimEnd('\n');
         }
+
+
+
+        public static void Serialize(SettingsDocument set, string path)
+        {
+            File.WriteAllText(path, set.ToString());
+        }
+        public static SettingsDocument Deserialize(string path) => new SettingsDocument(File.ReadAllText(path));
     }
 }
