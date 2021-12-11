@@ -28,8 +28,8 @@ namespace DidasUtils.ErrorCorrection
         /// <summary>
         /// Default constructor.
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="data"></param>
+        /// <param name="type">The type of error correction to use.</param>
+        /// <param name="data">The data to protect.</param>
         public ErrorProtectedBlock(ErrorProtectionType type, byte[] data)
         {
             if (data.Length > 32768) throw new ArgumentException("Data must no longer than 32768 bytes (32K).");
@@ -42,6 +42,11 @@ namespace DidasUtils.ErrorCorrection
 
 
 
+        /// <summary>
+        /// Serializes a given ErrorProtectedBlock to a byte array.
+        /// </summary>
+        /// <param name="block"></param>
+        /// <returns></returns>
         public static byte[] Serialize(ErrorProtectedBlock block)
         {
             /*
@@ -61,6 +66,11 @@ namespace DidasUtils.ErrorCorrection
 
             return ret;
         }
+        /// <summary>
+        /// Deserializes a ErrorProtectedBlock from a byte array.
+        /// </summary>
+        /// <param name="bytes">The byte array to deserialize from.</param>
+        /// <returns></returns>
         public static ErrorProtectedBlock Deserialize(byte[] bytes)
         {
             ErrorProtectedBlock ret = new ErrorProtectedBlock
@@ -110,8 +120,17 @@ namespace DidasUtils.ErrorCorrection
             return ret;
         }
 
+        //TODO: Add stream deserialization.
 
 
+
+        /// <summary>
+        /// Protects a byte array.
+        /// </summary>
+        /// <param name="data">The data to protect.</param>
+        /// <param name="protectionType">The type of error protection used.</param>
+        /// <param name="protectedBlockSize">The size of the raw data block.</param>
+        /// <returns>An array of ErrorProtectedBlocks holding the protected data.</returns>
         public static ErrorProtectedBlock[] ProtectData(byte[] data, ErrorProtectionType protectionType, int protectedBlockSize)
         {
             List<ErrorProtectedBlock> blocks = new List<ErrorProtectedBlock>();
@@ -127,6 +146,21 @@ namespace DidasUtils.ErrorCorrection
             }
 
             return blocks.ToArray();
+        }
+        /// <summary>
+        /// Protects a byte array.
+        /// </summary>
+        /// <param name="data">The data to protect.</param>
+        /// <param name="protectionType">The type of error protection used.</param>
+        /// <param name="protectedBlockSize">The size of the raw data block.</param>
+        /// <returns>A byte array holding the protected data.</returns>
+        public static byte[] ProtectDataToArray(byte[] data, ErrorProtectionType protectionType, int protectedBlockSize)
+        {
+            List<byte> bytes = new List<byte>();
+
+            foreach (ErrorProtectedBlock b in ProtectData(data, protectionType, protectedBlockSize)) bytes.AddRange(Serialize(b));
+
+            return bytes.ToArray();
         }
 
 
@@ -168,14 +202,38 @@ namespace DidasUtils.ErrorCorrection
 
 
 
+        /// <summary>
+        /// Enum that defines the used error protection type.
+        /// </summary>
         public enum ErrorProtectionType : byte
         {
+            /// <summary>
+            /// Default invalid value.
+            /// </summary>
             None = 0,
+            /// <summary>
+            /// 
+            /// </summary>
             CheckSum8 = 1,
+            /// <summary>
+            /// 
+            /// </summary>
             CheckSum16 = 2,
+            /// <summary>
+            /// 
+            /// </summary>
             CheckSum32 = 3,
+            /// <summary>
+            /// 
+            /// </summary>
             CheckSum64 = 4,
+            /// <summary>
+            /// 
+            /// </summary>
             Fletcher16 = 5,
+            /// <summary>
+            /// 
+            /// </summary>
             Fletcher32 = 6,
         }
     }

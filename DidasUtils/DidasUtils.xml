@@ -61,14 +61,86 @@
             <summary>
             Default constructor.
             </summary>
-            <param name="type"></param>
-            <param name="data"></param>
+            <param name="type">The type of error correction to use.</param>
+            <param name="data">The data to protect.</param>
+        </member>
+        <member name="M:DidasUtils.ErrorCorrection.ErrorProtectedBlock.Serialize(DidasUtils.ErrorCorrection.ErrorProtectedBlock)">
+            <summary>
+            Serializes a given ErrorProtectedBlock to a byte array.
+            </summary>
+            <param name="block"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.ErrorCorrection.ErrorProtectedBlock.Deserialize(System.Byte[])">
+            <summary>
+            Deserializes a ErrorProtectedBlock from a byte array.
+            </summary>
+            <param name="bytes">The byte array to deserialize from.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.ErrorCorrection.ErrorProtectedBlock.ProtectData(System.Byte[],DidasUtils.ErrorCorrection.ErrorProtectedBlock.ErrorProtectionType,System.Int32)">
+            <summary>
+            Protects a byte array.
+            </summary>
+            <param name="data">The data to protect.</param>
+            <param name="protectionType">The type of error protection used.</param>
+            <param name="protectedBlockSize">The size of the raw data block.</param>
+            <returns>An array of ErrorProtectedBlocks holding the protected data.</returns>
+        </member>
+        <member name="M:DidasUtils.ErrorCorrection.ErrorProtectedBlock.ProtectDataToArray(System.Byte[],DidasUtils.ErrorCorrection.ErrorProtectedBlock.ErrorProtectionType,System.Int32)">
+            <summary>
+            Protects a byte array.
+            </summary>
+            <param name="data">The data to protect.</param>
+            <param name="protectionType">The type of error protection used.</param>
+            <param name="protectedBlockSize">The size of the raw data block.</param>
+            <returns>A byte array holding the protected data.</returns>
         </member>
         <member name="M:DidasUtils.ErrorCorrection.ErrorProtectedBlock.Validate">
             <summary>
             Validates the data block.
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:DidasUtils.ErrorCorrection.ErrorProtectedBlock.ErrorProtectionType">
+            <summary>
+            Enum that defines the used error protection type.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.ErrorCorrection.ErrorProtectedBlock.ErrorProtectionType.None">
+            <summary>
+            Default invalid value.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.ErrorCorrection.ErrorProtectedBlock.ErrorProtectionType.CheckSum8">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:DidasUtils.ErrorCorrection.ErrorProtectedBlock.ErrorProtectionType.CheckSum16">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:DidasUtils.ErrorCorrection.ErrorProtectedBlock.ErrorProtectionType.CheckSum32">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:DidasUtils.ErrorCorrection.ErrorProtectedBlock.ErrorProtectionType.CheckSum64">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:DidasUtils.ErrorCorrection.ErrorProtectedBlock.ErrorProtectionType.Fletcher16">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:DidasUtils.ErrorCorrection.ErrorProtectedBlock.ErrorProtectionType.Fletcher32">
+            <summary>
+            
+            </summary>
         </member>
         <member name="T:DidasUtils.ErrorCorrection.Fletcher">
             <summary>
