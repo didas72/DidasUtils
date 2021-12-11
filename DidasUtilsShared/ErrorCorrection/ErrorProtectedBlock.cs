@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DidasUtils.ErrorCorrection
 {
@@ -6,14 +7,14 @@ namespace DidasUtils.ErrorCorrection
     /// Class the represents an error protected block of data.
     /// </summary>
     //TODO: Finish and make public
-    class ErrorProtectedBlock
+    public class ErrorProtectedBlock
     {
         /// <summary>
         /// Holds the data contained in the block.
         /// </summary>
         public byte[] data;
         /// <summary>
-        /// 
+        /// Holds the data validation codes.
         /// </summary>
         public byte[] errorProtection;
         /// <summary>
@@ -24,20 +25,33 @@ namespace DidasUtils.ErrorCorrection
 
 
         private ErrorProtectedBlock() { }
-        public ErrorProtectedBlock(ErrorProtectionType type, byte[] data, byte[] errorProtection)
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="data"></param>
+        public ErrorProtectedBlock(ErrorProtectionType type, byte[] data)
         {
             if (data.Length > 32768) throw new ArgumentException("Data must no longer than 32768 bytes (32K).");
             if (errorProtection.Length > 256) throw new ArgumentException("Error protection must no longer than 256 bytes.");
 
             this.errorProtectionType = type;
             this.data = data;
-            this.errorProtection = errorProtection;
+            this.errorProtection = GetErrorProtection(data, type);
         }
 
 
 
         public static byte[] Serialize(ErrorProtectedBlock block)
         {
+            /*
+            i - l - name
+            0 - 1 - protection type
+            1 - 2 - data len
+            3 - X - data
+            X - X - error protection
+             */
+
             byte[] ret = new byte[3 + block.data.Length + block.errorProtection.Length];
 
             ret[0] = (byte)block.errorProtectionType;
@@ -98,13 +112,58 @@ namespace DidasUtils.ErrorCorrection
 
 
 
+        public static ErrorProtectedBlock[] ProtectData(byte[] data, ErrorProtectionType protectionType, int protectedBlockSize)
+        {
+            List<ErrorProtectedBlock> blocks = new List<ErrorProtectedBlock>();
+            int head = 0;
+
+            while (head > data.Length)
+            {
+                byte[] dataBlock = new byte[Math.Min(protectedBlockSize, data.Length - head)];
+                Buffer.BlockCopy(data, head, dataBlock, 0, dataBlock.Length);
+                head += dataBlock.Length;
+
+                blocks.Add(new ErrorProtectedBlock(protectionType, dataBlock));
+            }
+
+            return blocks.ToArray();
+        }
+
+
+
+        private static byte[] GetErrorProtection(byte[] data, ErrorProtectionType protectionType)
+        {
+            switch (protectionType)
+            {
+                case ErrorProtectionType.CheckSum8:
+                    return new byte[] { CheckSum.CheckSum8(data) };
+
+                case ErrorProtectionType.Fletcher16:
+                    return BitConverter.GetBytes(Fletcher.Fletcher16(data));
+
+                case ErrorProtectionType.Fletcher32:
+                    return BitConverter.GetBytes(Fletcher.Fletcher32(data));
+
+                case ErrorProtectionType.None: return Array.Empty<byte>();
+                default: throw new NotImplementedException();
+            }
+        }
+
+
+
         /// <summary>
-        /// [NOT IMPLEMENTED] Validates the data block.
+        /// Validates the data block.
         /// </summary>
         /// <returns></returns>
         public bool Validate()
         {
-            throw new NotImplementedException();
+            byte[] dataProt = GetErrorProtection(data, errorProtectionType);
+
+            if (dataProt.Length != errorProtection.Length) return false;
+
+            for (int i = 0; i < dataProt.Length; i++) if (dataProt[i] != errorProtection[i]) return false;
+
+            return true;
         }
 
 

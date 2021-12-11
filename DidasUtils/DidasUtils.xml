@@ -1,0 +1,1056 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DidasUtils</name>
+    </assembly>
+    <members>
+        <member name="T:DidasUtils.ErrorCorrection.CheckSum">
+            <summary>
+            Class that holds methods to assist with the creation of checksums.
+            </summary>
+        </member>
+        <member name="M:DidasUtils.ErrorCorrection.CheckSum.CheckSum64(System.UInt64[])">
+            <summary>
+            Calculates the 64-bit checksum of the given values.
+            </summary>
+            <param name="source">The values to calculate the checksum of.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.ErrorCorrection.CheckSum.CheckSum32(System.UInt32[])">
+            <summary>
+            Calculates the 32-bit checksum of the given values.
+            </summary>
+            <param name="source">The values to calculate the checksum of.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.ErrorCorrection.CheckSum.CheckSum16(System.UInt16[])">
+            <summary>
+            Calculates the 16-bit checksum of the given values.
+            </summary>
+            <param name="source">The values to calculate the checksum of.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.ErrorCorrection.CheckSum.CheckSum8(System.Byte[])">
+            <summary>
+            Calculates the 8-bit checksum of the given values.
+            </summary>
+            <param name="source">The values to calculate the checksum of.</param>
+            <returns></returns>
+        </member>
+        <member name="T:DidasUtils.ErrorCorrection.ErrorProtectedBlock">
+            <summary>
+            Class the represents an error protected block of data.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.ErrorCorrection.ErrorProtectedBlock.data">
+            <summary>
+            Holds the data contained in the block.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.ErrorCorrection.ErrorProtectedBlock.errorProtection">
+            <summary>
+            Holds the data validation codes.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.ErrorCorrection.ErrorProtectedBlock.errorProtectionType">
+            <summary>
+            The type of error protection used.
+            </summary>
+        </member>
+        <member name="M:DidasUtils.ErrorCorrection.ErrorProtectedBlock.#ctor(DidasUtils.ErrorCorrection.ErrorProtectedBlock.ErrorProtectionType,System.Byte[])">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="type"></param>
+            <param name="data"></param>
+        </member>
+        <member name="M:DidasUtils.ErrorCorrection.ErrorProtectedBlock.Validate">
+            <summary>
+            Validates the data block.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DidasUtils.ErrorCorrection.Fletcher">
+            <summary>
+            Class that holds methods to assist with the creation of fletcher checksums.
+            </summary>
+            <remarks>Adapted from Wikipedia's article on Fletcher's Checksum on 10/10/2021</remarks>
+        </member>
+        <member name="M:DidasUtils.ErrorCorrection.Fletcher.Fletcher16(System.Byte[])">
+            <summary>
+            Calculates the 16-bit Flether checksum for the given source bytes.
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.ErrorCorrection.Fletcher.Fletcher32(System.Byte[])">
+            <summary>
+            Calculates the 32-bit Flether checksum for the given source bytes.
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.ErrorCorrection.Fletcher.Fletcher32(System.UInt16[])">
+            <summary>
+            Calculates the 32-bit Flether checksum for the given source uhsorts.
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DidasUtils.Data.SegmentedData">
+            <summary>
+            Class to enable safer tranfer of data over a NetworkStream.
+            </summary>
+        </member>
+        <member name="M:DidasUtils.Data.SegmentedData.SendToStream(System.Byte[],System.Net.Sockets.NetworkStream,System.Int32)">
+            <summary>
+            Sends a byte array in a safer way.
+            </summary>
+            <param name="data">The byte array containing the data to be sent.</param>
+            <param name="stream">The stream to send the data to.</param>
+            <param name="blockSize">The size of the blocks to be sent.</param>
+        </member>
+        <member name="M:DidasUtils.Data.SegmentedData.ReadFromStream(System.Net.Sockets.NetworkStream,System.Int32)">
+            <summary>
+            Reads a byte array received in blocks.
+            </summary>
+            <param name="stream">The stream to read from.</param>
+            <param name="blockSize">The expected size of the blocks to receive.</param>
+            <returns></returns>
+        </member>
+        <member name="T:DidasUtils.Extensions.ExtensionMethods">
+            <summary>
+            Class that contains several extension methods.
+            </summary>
+        </member>
+        <member name="M:DidasUtils.Extensions.ExtensionMethods.Truncate(System.String,System.Int32)">
+            <summary>
+            Truncates the string to a given length.
+            </summary>
+            <param name="value"></param>
+            <param name="maxLength">The length to truncate the string to.</param>
+            <returns>Truncated string.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:DidasUtils.Extensions.ExtensionMethods.SetLength(System.String,System.Int32)">
+            <summary>
+            Returns a string with the given length, either truncated or padded with spaces.
+            </summary>
+            <param name="value"></param>
+            <param name="length">The length to set the string to.</param>
+            <returns>Rescaled string.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:DidasUtils.Extensions.ExtensionMethods.Loop(System.String,System.Int32)">
+            <summary>
+            Repeats the string a given amount of times.
+            </summary>
+            <param name="value"></param>
+            <param name="times">The number of times to repeat the string.</param>
+            <returns>Looped string.</returns>
+        </member>
+        <member name="M:DidasUtils.Extensions.ExtensionMethods.GetFirst``1(``0[],System.Int32)">
+            <summary>
+            Gets the first X values from an array.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="array"></param>
+            <param name="amount">The number of values to return.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Extensions.ExtensionMethods.RemainingBytes(System.IO.Stream)">
+            <summary>
+            Gets the number of remaining bytes in the stream;
+            </summary>
+            <param name="stream"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Extensions.ExtensionMethods.GetValues``2(System.Collections.Generic.Dictionary{``0,``1})">
+            <summary>
+            Gets an array containing the values present in the given Dictionary.
+            </summary>
+            <typeparam name="K"></typeparam>
+            <typeparam name="V"></typeparam>
+            <param name="dictionary">Dictionary from which to take the values.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Extensions.ExtensionMethods.GetKeys``2(System.Collections.Generic.Dictionary{``0,``1})">
+            <summary>
+            Gets an array containing the keys present in the given Dictionary.
+            </summary>
+            <typeparam name="K"></typeparam>
+            <typeparam name="V"></typeparam>
+            <param name="dictionary">Dictionary from which to take the keys.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Extensions.ExtensionMethods.GetFirstChildOfName(System.Xml.XmlNode,System.String,System.Xml.XmlNode@)">
+            <summary>
+            Gets the first child with a certain name from a XmlNode.
+            </summary>
+            <param name="parent"></param>
+            <param name="name">The name to check for.</param>
+            <param name="child">The child XmlNode</param>
+            <returns>Boolean indicating the operation's success.</returns>
+        </member>
+        <member name="M:DidasUtils.Extensions.ExtensionMethods.GetIndexesOf(System.String,System.String)">
+            <summary>
+            Gets the indexes of all matches of the given substring.
+            </summary>
+            <param name="str"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Extensions.ExtensionMethods.Add``2(System.Collections.Generic.Dictionary{``0,``1},System.Collections.Generic.KeyValuePair{``0,``1})">
+            <summary>
+            Adds a KeyValuePair to a dictionary.
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="dictionary"></param>
+            <param name="pair"></param>
+        </member>
+        <member name="M:DidasUtils.Extensions.ExtensionMethods.ToIntArray(System.Collections.Generic.List{System.Boolean},System.Int32@)">
+            <summary>
+            Converts the List of bool to a byte array and outputs the number of used bits.
+            </summary>
+            <param name="self"></param>
+            <param name="usedBits"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Extensions.ExtensionMethods.NextEnum``1(System.Random)">
+            <summary>
+            Gets a random but valid value from an enum.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="rdm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Extensions.ExtensionMethods.EnqueueRange``1(System.Collections.Generic.Queue{``0},``0[])">
+            <summary>
+            Enqueues a range of items.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="queue"></param>
+            <param name="items"></param>
+        </member>
+        <member name="T:DidasUtils.Logging.Log">
+            <summary>
+            Class containing methods to log events to a file and/or print them to console.
+            </summary>
+        </member>
+        <member name="P:DidasUtils.Logging.Log.LogPath">
+            <summary>
+            The path to the log file.
+            </summary>
+        </member>
+        <member name="P:DidasUtils.Logging.Log.LogFile">
+            <summary>
+            The name of the log file.
+            </summary>
+        </member>
+        <member name="P:DidasUtils.Logging.Log.UsePrint">
+            <summary>
+            Toggles wether the logs should be printed to the console.
+            </summary>
+        </member>
+        <member name="T:DidasUtils.Logging.Log.EventType">
+            <summary>
+            Enum that specifies the accepted event types.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.Logging.Log.EventType.Info">
+            <summary>
+            Informative only event. Not a concern to the user nor to the programmer.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.Logging.Log.EventType.Warning">
+            <summary>
+            Potentially problematic event. Not much of a concern to the user but something for the programmer to think about.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.Logging.Log.EventType.HighWarning">
+            <summary>
+            A potentially problematic even, possibly leading to a bigger probelm. A concern to both the user and the programmer.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.Logging.Log.EventType.Error">
+            <summary>
+            An exception type event. A concern to both the user and the programmer.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.Logging.Log.EventType.Fatal">
+            <summary>
+            A catastrophic event, definitely leading to a crash or controlled crash.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.Logging.Log.EventType.Performance">
+            <summary>
+            Informative only event, reporting program performance. Useful for both the user and the programmer.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.Logging.Log.EventType.DevInfo">
+            <summary>
+            Informative only event, reporting program performance. Useful for the programmer only and might be confusing for the user.
+            </summary>
+        </member>
+        <member name="M:DidasUtils.Logging.Log.InitLog(System.String)">
+            <summary>
+            Initializes the log file. 
+            </summary>
+            <param name="path">The path to the log file.</param>
+            <remarks>Must be called once before calling any other log related method.</remarks>
+        </member>
+        <member name="M:DidasUtils.Logging.Log.InitLog(System.String,System.String)">
+            <summary>
+            Initializes the log file. 
+            </summary>
+            <param name="path">The path to the log file.</param>
+            <param name="logFile">The file name for the log.</param>
+            <remarks>Must be called once before calling any other log related method.</remarks>
+        </member>
+        <member name="M:DidasUtils.Logging.Log.InitConsole">
+            <summary>
+            Initializes console for use with this class.
+            </summary>
+        </member>
+        <member name="M:DidasUtils.Logging.Log.LogEvent(System.String,System.String)">
+            <summary>
+            Logs an event of type EventType.Info, printing to screen and saving to file.
+            </summary>
+            <param name="msg">The log message.</param>
+            <param name="sender">The name of the sender.</param>
+        </member>
+        <member name="M:DidasUtils.Logging.Log.LogEvent(DidasUtils.Logging.Log.EventType,System.String,System.String)">
+            <summary>
+            Logs an event, printing to screen and saving to file.
+            </summary>
+            <param name="eventType">The type of event to be logged.</param>
+            <param name="msg">The log message.</param>
+            <param name="sender">The name of the sender.</param>
+        </member>
+        <member name="M:DidasUtils.Logging.Log.LogEvent(DidasUtils.Logging.Log.EventType,System.String,System.String,System.Boolean)">
+            <summary>
+            Logs an event, optionally printing it to screen.
+            </summary>
+            <param name="eventType">The type of event to be logged.</param>
+            <param name="msg">The log message.</param>
+            <param name="sender">The name of the sender.</param>
+            <param name="writeToScreen">>Wether or not to print to screen.</param>
+        </member>
+        <member name="M:DidasUtils.Logging.Log.LogEvent(DidasUtils.Logging.Log.EventType,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Logs an event, optionally printing it to screen and saving to file.
+            </summary>
+            <param name="eventType">The type of event to be logged.</param>
+            <param name="msg">The log message.</param>
+            <param name="sender">The name of the sender.</param>
+            <param name="writeToScreen">Wether or not to print to screen.</param>
+            <param name="writeToFile">Wether or not to save to file.</param>
+        </member>
+        <member name="M:DidasUtils.Logging.Log.LogException(System.String,System.String,System.Exception)">
+            <summary>
+            Logs an exception with a message.
+            </summary>
+            <param name="msg"></param>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DidasUtils.Logging.Log.Print(System.String)">
+            <summary>
+            Prints a message to screen without any other log information.
+            </summary>
+            <param name="msg">The message to print to screen.</param>
+        </member>
+        <member name="M:DidasUtils.Logging.Log.SafeWriteLine(System.String)">
+            <summary>
+            Writes a line to console in a thread safe way.
+            </summary>
+            <param name="msg">The message to print to screen.</param>
+        </member>
+        <member name="M:DidasUtils.Logging.Log.TryWriteLog(System.String,System.String)">
+            <summary>
+            Tries to write log to file, attempting up to ten times.
+            </summary>
+            <param name="path">The path to the log file.</param>
+            <param name="log">The log to write to file.</param>
+            <returns>Boolean indicating the operation's success.</returns>
+        </member>
+        <member name="T:DidasUtils.Files.SettingsDocument">
+            <summary>
+            Class that represents a settings file and contains useful methods for interaction with such files.
+            </summary>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.#ctor">
+            <summary>
+            Default empty constructor.
+            </summary>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.#ctor(System.String)">
+            <summary>
+            Constructor that parses a string source.
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.ContainsEntry(System.String)">
+            <summary>
+            Checks if the document contains a given setting.
+            </summary>
+            <param name="key">The name of the setting.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.ContainsEntries(System.String[])">
+            <summary>
+            Checks if the document contains all of the given settings.
+            </summary>
+            <param name="keys">Array with the setting names.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.ApplySettingsScheme(System.Collections.Generic.Dictionary{System.String,System.String},System.Boolean)">
+            <summary>
+            Applies the current document to a given scheme, adding missing settings and optionally resetting all to default values.
+            </summary>
+            <param name="scheme">The scheme to apply.</param>
+            <param name="resetAllToDefaults">Wether or not to reset to default values.</param>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.AddEntry(System.String,System.String)">
+            <summary>
+            Adds a setting to the document.
+            </summary>
+            <param name="key">The number of the setting.</param>
+            <param name="value">The value of the setting.</param>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.TrySetValue(System.String,System.String)">
+            <summary>
+            Attempts to set the value of the setting. Returns success state.
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.SetValue(System.String,System.String)">
+            <summary>
+            Sets the value of a setting.
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.SetValue(System.String,System.SByte)">
+            <summary>
+            Sets the value of a setting.
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.SetValue(System.String,System.Byte)">
+            <summary>
+            Sets the value of a setting.
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.SetValue(System.String,System.Int16)">
+            <summary>
+            Sets the value of a setting.
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.SetValue(System.String,System.UInt16)">
+            <summary>
+            Sets the value of a setting.
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.SetValue(System.String,System.Int32)">
+            <summary>
+            Sets the value of a setting.
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.SetValue(System.String,System.UInt32)">
+            <summary>
+            Sets the value of a setting.
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.SetValue(System.String,System.Int64)">
+            <summary>
+            Sets the value of a setting.
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.SetValue(System.String,System.UInt64)">
+            <summary>
+            Sets the value of a setting.
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.SetValue(System.String,System.Boolean)">
+            <summary>
+            Sets the value of a setting.
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.TryGetValue(System.String,System.String@)">
+            <summary>
+            Attempts to get a setting from the document.
+            </summary>
+            <param name="key">The name of the setting.</param>
+            <param name="value">The value, if it exists.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.GetString(System.String)">
+            <summary>
+            Gets the setting from the document, throwing an exception if the setting is not present.
+            </summary>
+            <param name="key">The name of the setting.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.GetSBytes(System.String)">
+            <summary>
+            Gets the setting from the document, throwing an exception if the setting is not present.
+            </summary>
+            <param name="key">The name of the setting.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.GetByte(System.String)">
+            <summary>
+            Gets the setting from the document, throwing an exception if the setting is not present.
+            </summary>
+            <param name="key">The name of the setting.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.GetShort(System.String)">
+            <summary>
+            Gets the setting from the document, throwing an exception if the setting is not present.
+            </summary>
+            <param name="key">The name of the setting.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.GetUShort(System.String)">
+            <summary>
+            Gets the setting from the document, throwing an exception if the setting is not present.
+            </summary>
+            <param name="key">The name of the setting.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.GetInt(System.String)">
+            <summary>
+            Gets the setting from the document, throwing an exception if the setting is not present.
+            </summary>
+            <param name="key">The name of the setting.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.GetUInt(System.String)">
+            <summary>
+            Gets the setting from the document, throwing an exception if the setting is not present.
+            </summary>
+            <param name="key">The name of the setting.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.GetLong(System.String)">
+            <summary>
+            Gets the setting from the document, throwing an exception if the setting is not present.
+            </summary>
+            <param name="key">The name of the setting.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.GetULong(System.String)">
+            <summary>
+            Gets the setting from the document, throwing an exception if the setting is not present.
+            </summary>
+            <param name="key">The name of the setting.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.GetBool(System.String)">
+            <summary>
+            Gets the setting from the document, throwing an exception if the setting is not present.
+            </summary>
+            <param name="key">The name of the setting.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.ToString">
+            <summary>
+            Converts the settings document to a string.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.Serialize(DidasUtils.Files.SettingsDocument,System.String)">
+            <summary>
+            Serializes a SettingsDocument to a file.
+            </summary>
+            <param name="set"></param>
+            <param name="path"></param>
+        </member>
+        <member name="M:DidasUtils.Files.SettingsDocument.Deserialize(System.String)">
+            <summary>
+            Deserializes a SettingsDocument from a file.
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DidasUtils.Files.SevenZip">
+            <summary>
+            Class containing methods to use the SevenZip utility.
+            </summary>
+        </member>
+        <member name="M:DidasUtils.Files.SevenZip.Compress7z(System.String,System.String)">
+            <summary>
+            Compresses a directory or file into a .7z file.
+            </summary>
+            <param name="sourceDir">The directory or file to compress.</param>
+            <param name="outDir">The output file.</param>
+        </member>
+        <member name="M:DidasUtils.Files.SevenZip.Decompress7z(System.String,System.String)">
+            <summary>
+            Decompresses a.7z file.
+            </summary>
+            <param name="sourceDir">The file to decompress</param>
+            <param name="outDir">The directory to store the decompressed files to.</param>
+        </member>
+        <member name="M:DidasUtils.Files.SevenZip.TryCompress7z(System.String,System.String)">
+            <summary>
+            Compresses a directory or file into a .7z file.
+            </summary>
+            <param name="sourceDir">The directory or file to compress.</param>
+            <param name="outDir">The output file.</param>
+            <returns>Boolean indicating the operation's success.</returns>
+        </member>
+        <member name="M:DidasUtils.Files.SevenZip.TryDecompress7z(System.String,System.String)">
+            <summary>
+            Decompresses a.7z file.
+            </summary>
+            <param name="sourceDir">The file to decompress</param>
+            <param name="outDir">The directory to store the decompressed files to.</param>
+            <returns>Boolean indicating the operation's success.</returns>
+        </member>
+        <member name="T:DidasUtils.Mathf">
+            <summary>
+            Class that contains several math-related methods.
+            </summary>
+        </member>
+        <member name="M:DidasUtils.Mathf.DivideRoundUp(System.Int32,System.Int32)">
+            <summary>
+            Calculates the rounded up quotient of an integer division.
+            </summary>
+            <param name="dividend"></param>
+            <param name="divisor"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Mathf.Clamp(System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Clamps a value between a minimum and a maximum.
+            </summary>
+            <param name="value">The number to be clamped.</param>
+            <param name="min">Minimum final value.</param>
+            <param name="max">Maximum final value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Mathf.Clamp(System.SByte,System.SByte,System.SByte)">
+            <summary>
+            Clamps a value between a minimum and a maximum.
+            </summary>
+            <param name="value">The number to be clamped.</param>
+            <param name="min">Minimum final value.</param>
+            <param name="max">Maximum final value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Mathf.Clamp(System.UInt16,System.UInt16,System.UInt16)">
+            <summary>
+            Clamps a value between a minimum and a maximum.
+            </summary>
+            <param name="value">The number to be clamped.</param>
+            <param name="min">Minimum final value.</param>
+            <param name="max">Maximum final value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Mathf.Clamp(System.Int16,System.Int16,System.Int16)">
+            <summary>
+            Clamps a value between a minimum and a maximum.
+            </summary>
+            <param name="value">The number to be clamped.</param>
+            <param name="min">Minimum final value.</param>
+            <param name="max">Maximum final value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Mathf.Clamp(System.UInt32,System.UInt32,System.UInt32)">
+            <summary>
+            Clamps a value between a minimum and a maximum.
+            </summary>
+            <param name="value">The number to be clamped.</param>
+            <param name="min">Minimum final value.</param>
+            <param name="max">Maximum final value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Mathf.Clamp(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Clamps a value between a minimum and a maximum.
+            </summary>
+            <param name="value">The number to be clamped.</param>
+            <param name="min">Minimum final value.</param>
+            <param name="max">Maximum final value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Mathf.Clamp(System.Int64,System.Int64,System.Int64)">
+            <summary>
+            Clamps a value between a minimum and a maximum.
+            </summary>
+            <param name="value">The number to be clamped.</param>
+            <param name="min">Minimum final value.</param>
+            <param name="max">Maximum final value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Mathf.Clamp(System.UInt64,System.UInt64,System.UInt64)">
+            <summary>
+            Clamps a value between a minimum and a maximum.
+            </summary>
+            <param name="value">The number to be clamped.</param>
+            <param name="min">Minimum final value.</param>
+            <param name="max">Maximum final value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Mathf.DegToRad(System.Double)">
+            <summary>
+            Converts degrees to radians.
+            </summary>
+            <param name="angle"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Mathf.RadToDeg(System.Double)">
+            <summary>
+            Converts radians to degrees.
+            </summary>
+            <param name="angle"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DidasUtils.Net.Networking">
+            <summary>
+            Holds methods related to networking.
+            </summary>
+        </member>
+        <member name="M:DidasUtils.Net.Networking.TryDownloadFile(System.String,System.String)">
+            <summary>
+            Attempts to download a file.
+            </summary>
+            <param name="url">The URL to downlaod from.</param>
+            <param name="path">The path to store the file.</param>
+            <returns>Boolean indicating the operation's success.</returns>
+        </member>
+        <member name="M:DidasUtils.Net.Networking.IsUrlUp(System.String)">
+            <summary>
+            Checks wether a given URL is accessible.
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DidasUtils.Net.Client">
+            <summary>
+            Wrapper class that contains a TcpClient and useful networking methods.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.Net.Client.socket">
+            <summary>
+            The wrapped TcpClient instance.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.Net.Client.messageReceived">
+            <summary>
+            The callback for when a message is received.
+            </summary>
+        </member>
+        <member name="T:DidasUtils.Net.Client.MessageReceived">
+            <summary>
+            Callback delegate for when a message is received.
+            </summary>
+            <param name="sender">The client that received the message.</param>
+            <param name="message"></param>
+        </member>
+        <member name="M:DidasUtils.Net.Client.#ctor(System.Net.Sockets.TcpClient)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="socket">The TcpClient to wrap.</param>
+        </member>
+        <member name="M:DidasUtils.Net.Client.StartListening">
+            <summary>
+            Starts listening for incoming messages, calling <see cref="F:DidasUtils.Net.Client.messageReceived"/> callback when needed.
+            </summary>
+        </member>
+        <member name="M:DidasUtils.Net.Client.StopListening">
+            <summary>
+            Stops listening for incoming messages.
+            </summary>
+        </member>
+        <member name="M:DidasUtils.Net.Client.SendMessage(System.Byte[])">
+            <summary>
+            Sends an byte array thorugh the TcpClient.
+            </summary>
+            <param name="message">The message to be sent.</param>
+            <returns>Boolean indicating the operation's success.</returns>
+        </member>
+        <member name="M:DidasUtils.Net.Client.Disconnect">
+            <summary>
+            Disconnects the TcpClient and disposes all resources.
+            </summary>
+        </member>
+        <member name="T:DidasUtils.Numerics.Vector2i">
+            <summary>
+            Integer Vector2
+            </summary>
+        </member>
+        <member name="F:DidasUtils.Numerics.Vector2i.x">
+            <summary>
+            The x coordinate of the vector.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.Numerics.Vector2i.y">
+            <summary>
+            The y coordinate of the vector.
+            </summary>
+        </member>
+        <member name="P:DidasUtils.Numerics.Vector2i.Magnitude">
+            <summary>
+            The length of the vector.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.Numerics.Vector2i.Zero">
+            <summary>
+            Default 0,0 vector.
+            </summary>
+        </member>
+        <member name="M:DidasUtils.Numerics.Vector2i.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+        </member>
+        <member name="M:DidasUtils.Numerics.Vector2i.DotProduct(DidasUtils.Numerics.Vector2i,DidasUtils.Numerics.Vector2i)">
+            <summary>
+            Calculates the dot product between two vectors.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Numerics.Vector2i.Angle(DidasUtils.Numerics.Vector2i,DidasUtils.Numerics.Vector2i)">
+            <summary>
+            Calculates the angle between two vectors.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Numerics.Vector2i.op_UnaryPlus(DidasUtils.Numerics.Vector2i)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Numerics.Vector2i.op_UnaryNegation(DidasUtils.Numerics.Vector2i)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Numerics.Vector2i.op_Addition(DidasUtils.Numerics.Vector2i,DidasUtils.Numerics.Vector2i)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Numerics.Vector2i.op_Subtraction(DidasUtils.Numerics.Vector2i,DidasUtils.Numerics.Vector2i)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Numerics.Vector2i.op_Multiply(DidasUtils.Numerics.Vector2i,DidasUtils.Numerics.Vector2i)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Numerics.Vector2i.op_Division(DidasUtils.Numerics.Vector2i,DidasUtils.Numerics.Vector2i)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DidasUtils.Numerics.Vector3i">
+            <summary>
+            Integer Vector3
+            </summary>
+        </member>
+        <member name="F:DidasUtils.Numerics.Vector3i.x">
+            <summary>
+            The x coordinate of the vector.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.Numerics.Vector3i.y">
+            <summary>
+            The y coordinate of the vector.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.Numerics.Vector3i.z">
+            <summary>
+            The z coordinate of the vector.
+            </summary>
+        </member>
+        <member name="P:DidasUtils.Numerics.Vector3i.Magnitude">
+            <summary>
+            The length of the vector.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.Numerics.Vector3i.Zero">
+            <summary>
+            Default 0,0,0 vector.
+            </summary>
+        </member>
+        <member name="M:DidasUtils.Numerics.Vector3i.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <param name="z"></param>
+        </member>
+        <member name="M:DidasUtils.Numerics.Vector3i.DotProduct(DidasUtils.Numerics.Vector3i,DidasUtils.Numerics.Vector3i)">
+            <summary>
+            Calculates the dot product between two vectors.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Numerics.Vector3i.Angle(DidasUtils.Numerics.Vector3i,DidasUtils.Numerics.Vector3i)">
+            <summary>
+            Calculates the angle between two vectors.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Numerics.Vector3i.op_UnaryPlus(DidasUtils.Numerics.Vector3i)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Numerics.Vector3i.op_UnaryNegation(DidasUtils.Numerics.Vector3i)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Numerics.Vector3i.op_Addition(DidasUtils.Numerics.Vector3i,DidasUtils.Numerics.Vector3i)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Numerics.Vector3i.op_Subtraction(DidasUtils.Numerics.Vector3i,DidasUtils.Numerics.Vector3i)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Numerics.Vector3i.op_Multiply(DidasUtils.Numerics.Vector3i,DidasUtils.Numerics.Vector3i)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Numerics.Vector3i.op_Division(DidasUtils.Numerics.Vector3i,DidasUtils.Numerics.Vector3i)">
+            <summary>
+            
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DidasUtils.Utils">
+            <summary>
+            Class that contains several genereral-purpose methods.
+            </summary>
+        </member>
+        <member name="M:DidasUtils.Utils.GetSubFiles(System.String)">
+            <summary>
+            Gets all files in the given directory and it's subdirectories.
+            </summary>
+            <param name="directory">The full path of the directory to be checked.</param>
+            <returns>Array containing the full paths of every file found.</returns>
+        </member>
+        <member name="M:DidasUtils.Utils.GetSubFiles(System.String,System.String)">
+            <summary>
+            Gets all files in the given directory and it's subdirectories that match the given search pattern.
+            </summary>
+            <param name="directory"></param>
+            <param name="searchPattern"></param>
+            <returns>Array containing the full paths of every file found.</returns>
+        </member>
+        <member name="M:DidasUtils.Utils.GetSubFilesSorted(System.String,System.String)">
+            <summary>
+            Gets all files in the given directory and it's subdirectories that match the given search pattern, sorted by containing directory name.
+            </summary>
+            <param name="directory"></param>
+            <param name="searchPattern"></param>
+            <returns>Array containing the full paths of every file found.</returns>
+        </member>
+        <member name="M:DidasUtils.Utils.SortFiles(System.String[])">
+            <summary>
+            Sorts file paths by their numeric values. Values must be ulong compatible.
+            </summary>
+            <param name="filenames">The paths to sort by filename.</param>
+            <returns>Sorted paths array.</returns>
+        </member>
+        <member name="M:DidasUtils.Utils.SortDirs(System.String[])">
+            <summary>
+            Sorts directory paths by their numeric values. Values must be ulong compatible.
+            </summary>
+            <param name="dirnames">The paths to sort by directory name.</param>
+            <returns>Sorted paths array.</returns>
+        </member>
+        <member name="M:DidasUtils.Utils.GetExecutablePath">
+            <summary>
+            Gets the path of the currently running .exe.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Utils.FormatSize(System.Int64)">
+            <summary>
+            Formats a size, in bytes, to a smaller, humanely readable value with two decimal places.
+            </summary>
+            <param name="size">The size, in bytes, to format.</param>
+        </member>
+        <member name="M:DidasUtils.Utils.WaitForKey">
+            <summary>
+            Waits for a key to be pressed while in console.
+            </summary>
+        </member>
+    </members>
+</doc>

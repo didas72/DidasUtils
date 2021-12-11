@@ -3,16 +3,72 @@
 using DidasUtils;
 using DidasUtils.Numerics;
 using DidasUtils.ConsoleUI;
+using DidasUtils.ErrorCorrection;
 
 namespace Tester
 {
     class Program
     {
-        private static CUIWindow window;
-        private static bool run = true;
+        
 
 
         static void Main(string[] args)
+        {
+            Random rdm = new Random();
+
+            for (int i = 0; i < 10000; i++)
+            {
+                Console.WriteLine($"Iter {i}");
+
+                int len = rdm.Next(16, 262144);
+                byte[] srcBytes = new byte[len];
+                rdm.NextBytes(srcBytes);
+
+                ErrorProtectedBlock[] blocks = ErrorProtectedBlock.ProtectData(srcBytes, ErrorProtectedBlock.ErrorProtectionType.Fletcher32, 32768);
+                ErrorProtectedBlock[] deserializedBlocks = new ErrorProtectedBlock[blocks.Length];
+
+                for (int b = 0; b < blocks.Length; b++) deserializedBlocks[b] = ErrorProtectedBlock.Deserialize(ErrorProtectedBlock.Serialize(blocks[b]));
+
+                int head = 0; bool bug;
+                for (int b = 0; b < deserializedBlocks.Length; b++)
+                {
+                    bug = false;
+
+                    if (!deserializedBlocks[b].Validate())
+                    {
+                        Console.WriteLine($"Block {b} of round {i} failed validation.");
+                        head += deserializedBlocks[b].data.Length;
+                        continue;
+                    }
+
+                    for (int t = 0; t < deserializedBlocks[b].data.Length; t++)
+                    {
+                        if (!bug)
+                        {
+                            if (deserializedBlocks[b].data[t] != srcBytes[head])
+                            {
+                                bug = true;
+                                Console.WriteLine($"First bug for block {b} of round {i} at byte {t}.");
+                            }
+                        }
+
+                        head++;
+                    }
+                }
+            }
+
+            Console.WriteLine("Done");
+            Console.ReadLine();
+        }
+
+
+
+
+
+        private static CUIWindow window;
+        private static bool run = true;
+
+        private static void TestCUI()
         {
             window = BuildWindow();
 
