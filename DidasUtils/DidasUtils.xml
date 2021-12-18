@@ -78,6 +78,13 @@
             <param name="bytes">The byte array to deserialize from.</param>
             <returns></returns>
         </member>
+        <member name="M:DidasUtils.ErrorCorrection.ErrorProtectedBlock.DeserializeArray(System.Byte[])">
+            <summary>
+            Deserializes an array of ErrorProtectedBlock s from a byte array.
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
         <member name="M:DidasUtils.ErrorCorrection.ErrorProtectedBlock.ProtectData(System.Byte[],DidasUtils.ErrorCorrection.ErrorProtectedBlock.ErrorProtectionType,System.Int32)">
             <summary>
             Protects a byte array.

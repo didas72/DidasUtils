@@ -80,44 +80,35 @@ namespace DidasUtils.ErrorCorrection
             };
             Array.Copy(bytes, 3, ret.data, 0, ret.data.Length);
 
-            int len = 0xff;
-            switch ((ErrorProtectionType)bytes[0])
-            {
-                case ErrorProtectionType.None:
-                    len = 0;
-                    break;
-
-                case ErrorProtectionType.CheckSum8:
-                    len = 1;
-                    break;
-
-                case ErrorProtectionType.CheckSum16:
-                    len = 2;
-                    break;
-
-                case ErrorProtectionType.CheckSum32:
-                    len = 4;
-                    break;
-
-                case ErrorProtectionType.CheckSum64:
-                    len = 8;
-                    break;
-
-                case ErrorProtectionType.Fletcher16:
-                    len = 2;
-                    break;
-
-                case ErrorProtectionType.Fletcher32:
-                    len = 4;
-                    break;
-            }
-
-            if (len == 0xff)
-                throw new Exception("Invalid error protection type.");
+            byte len = GetErrorProtectionLength(ret.errorProtectionType);
 
             Array.Copy(bytes, 3 + ret.data.Length, ret.errorProtection, 0, len);
 
             return ret;
+        }
+        /// <summary>
+        /// Deserializes an array of ErrorProtectedBlock s from a byte array.
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        public static ErrorProtectedBlock[] DeserializeArray(byte[] bytes)
+        {
+            List<ErrorProtectedBlock> blocks = new List<ErrorProtectedBlock>();
+
+            int head = 0;
+            
+            while (head < bytes.Length)
+            {
+                int len = 4 + GetErrorProtectionLength((ErrorProtectionType)bytes[head]) + BitConverter.ToUInt16(bytes, head + 1);
+                byte[] blockBytes = new byte[len];
+                Array.Copy(bytes, head, blockBytes, 0, len);
+
+                blocks.Add(Deserialize(blockBytes));
+
+                head += len;
+            }
+
+            return blocks.ToArray();
         }
 
         //TODO: Add stream deserialization.
@@ -181,6 +172,45 @@ namespace DidasUtils.ErrorCorrection
                 case ErrorProtectionType.None: return Array.Empty<byte>();
                 default: throw new NotImplementedException();
             }
+        }
+        private static byte GetErrorProtectionLength(ErrorProtectionType type)
+        {
+            byte len = 0xff;
+            switch (type)
+            {
+                case ErrorProtectionType.None:
+                    len = 0;
+                    break;
+
+                case ErrorProtectionType.CheckSum8:
+                    len = 1;
+                    break;
+
+                case ErrorProtectionType.CheckSum16:
+                    len = 2;
+                    break;
+
+                case ErrorProtectionType.CheckSum32:
+                    len = 4;
+                    break;
+
+                case ErrorProtectionType.CheckSum64:
+                    len = 8;
+                    break;
+
+                case ErrorProtectionType.Fletcher16:
+                    len = 2;
+                    break;
+
+                case ErrorProtectionType.Fletcher32:
+                    len = 4;
+                    break;
+            }
+
+            if (len == 0xff)
+                throw new Exception("Invalid error protection type.");
+
+            return len;
         }
 
 
