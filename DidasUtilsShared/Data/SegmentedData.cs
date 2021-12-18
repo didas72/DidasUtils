@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.Sockets;
+using System.IO;
 
 namespace DidasUtils.Data
 {
@@ -19,7 +19,7 @@ namespace DidasUtils.Data
         /// <param name="data">The byte array containing the data to be sent.</param>
         /// <param name="stream">The stream to send the data to.</param>
         /// <param name="blockSize">The size of the blocks to be sent.</param>
-        public static void SendToStream(byte[] data, NetworkStream stream, int blockSize)
+        public static void SendToStream(byte[] data, Stream stream, int blockSize)
         {
             if (data == null)
                 throw new ArgumentException("Data must not be null.");
@@ -67,7 +67,7 @@ namespace DidasUtils.Data
         /// <param name="stream">The stream to read from.</param>
         /// <param name="blockSize">The expected size of the blocks to receive.</param>
         /// <returns></returns>
-        public static byte[] ReadFromStream(NetworkStream stream, int blockSize)
+        public static byte[] ReadFromStream(Stream stream, int blockSize)
         {
             if (!stream.CanRead)
                 throw new ArgumentException("Stream must be readable.");
