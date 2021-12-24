@@ -332,6 +332,11 @@
             Toggles wether the logs should be printed to the console.
             </summary>
         </member>
+        <member name="P:DidasUtils.Logging.Log.Initialized">
+            <summary>
+            Wether or not the log has been initialzied yet.
+            </summary>
+        </member>
         <member name="T:DidasUtils.Logging.Log.EventType">
             <summary>
             Enum that specifies the accepted event types.
@@ -838,7 +843,7 @@
             The wrapped TcpClient instance.
             </summary>
         </member>
-        <member name="F:DidasUtils.Net.Client.messageReceived">
+        <member name="E:DidasUtils.Net.Client.messageReceived">
             <summary>
             The callback for when a message is received.
             </summary>
@@ -853,12 +858,10 @@
             Checks wether the receiver is working on an incoming message.
             </summary>
         </member>
-        <member name="T:DidasUtils.Net.Client.MessageReceived">
+        <member name="P:DidasUtils.Net.Client.ReceivedMessages">
             <summary>
-            Callback delegate for when a message is received.
+            Tracks the number of messages received
             </summary>
-            <param name="sender">The client that received the message.</param>
-            <param name="message"></param>
         </member>
         <member name="M:DidasUtils.Net.Client.#ctor(System.Net.Sockets.TcpClient)">
             <summary>
@@ -868,7 +871,7 @@
         </member>
         <member name="M:DidasUtils.Net.Client.StartListening">
             <summary>
-            Starts listening for incoming messages, calling <see cref="F:DidasUtils.Net.Client.messageReceived"/> callback when needed.
+            Starts listening for incoming messages, calling <see cref="E:DidasUtils.Net.Client.messageReceived"/> callback when needed.
             </summary>
         </member>
         <member name="M:DidasUtils.Net.Client.StopListening">

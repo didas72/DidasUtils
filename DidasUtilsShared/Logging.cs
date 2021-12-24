@@ -23,6 +23,10 @@ namespace DidasUtils.Logging
         /// Toggles wether the logs should be printed to the console.
         /// </summary>
         public static bool UsePrint { get; set; } = true;
+        /// <summary>
+        /// Wether or not the log has been initialzied yet.
+        /// </summary>
+        public static bool Initialized { get; private set; } = false;
 
 
 
@@ -92,6 +96,7 @@ Start time {now.Hour}:{now.Minute}:{now.Second}
             try
             {
                 File.AppendAllText(Path.Combine(LogPath, LogFile), log);
+                Initialized = true;
             }
             catch
             {

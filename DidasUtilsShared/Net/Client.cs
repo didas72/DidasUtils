@@ -18,7 +18,7 @@ namespace DidasUtils.Net
         /// <summary>
         /// The callback for when a message is received.
         /// </summary>
-        public MessageReceived messageReceived;
+        public event EventHandler<byte[]> messageReceived;
         /// <summary>
         /// Checks wether the receive thread is running.
         /// </summary>
@@ -27,22 +27,17 @@ namespace DidasUtils.Net
         /// Checks wether the receiver is working on an incoming message.
         /// </summary>
         public  bool ReceiverBusy { get; private set; }
+        /// <summary>
+        /// Tracks the number of messages received
+        /// </summary>
+        public long ReceivedMessages { get; private set; } = 0;
 
 
         private readonly NetworkStream netStream;
         private Thread receiveThread;
         private volatile bool doListen = false;
 
-        private const ushort blockSize = ushort.MaxValue;
-
-
-
-        /// <summary>
-        /// Callback delegate for when a message is received.
-        /// </summary>
-        /// <param name="sender">The client that received the message.</param>
-        /// <param name="message"></param>
-        public delegate void MessageReceived(Client sender, byte[] message);
+        private const ushort blockSize = 4096;
 
 
 
@@ -96,8 +91,11 @@ namespace DidasUtils.Net
                 else
                     return false;
             }
-            catch
+            catch (Exception e)
             {
+                if (Logging.Log.Initialized)
+                    Logging.Log.LogException("Failed to send message.", "Client", e);
+
                 return false;
             }
 
@@ -123,15 +121,22 @@ namespace DidasUtils.Net
                 {
                     if (netStream.DataAvailable)
                     {
+                        ReceivedMessages++;
                         ReceiverBusy = true;
                         byte[] buffer = SegmentedData.ReadFromStream(netStream, blockSize);
+                        messageReceived?.Invoke(this, buffer);
                         ReceiverBusy = false;
-                        messageReceived.BeginInvoke(this, buffer, null, this);
+                    }
+                    else
+                    {
+                        Thread.Sleep(10);
                     }
                 }
-                catch { }
-
-                Thread.Sleep(10);
+                catch (Exception e)
+                {
+                    if (Logging.Log.Initialized)
+                        Logging.Log.LogException("Failed to receive message.", "Client", e);
+                }
             }
         }
     }
