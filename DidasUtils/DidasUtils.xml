@@ -181,7 +181,7 @@
             Class to enable safer tranfer of data over a NetworkStream.
             </summary>
         </member>
-        <member name="M:DidasUtils.Data.SegmentedData.SendToStream(System.Byte[],System.Net.Sockets.NetworkStream,System.Int32)">
+        <member name="M:DidasUtils.Data.SegmentedData.SendToStream(System.Byte[],System.IO.Stream,System.Int32)">
             <summary>
             Sends a byte array in a safer way.
             </summary>
@@ -189,7 +189,7 @@
             <param name="stream">The stream to send the data to.</param>
             <param name="blockSize">The size of the blocks to be sent.</param>
         </member>
-        <member name="M:DidasUtils.Data.SegmentedData.ReadFromStream(System.Net.Sockets.NetworkStream,System.Int32)">
+        <member name="M:DidasUtils.Data.SegmentedData.ReadFromStream(System.IO.Stream,System.Int32)">
             <summary>
             Reads a byte array received in blocks.
             </summary>
@@ -841,6 +841,16 @@
         <member name="F:DidasUtils.Net.Client.messageReceived">
             <summary>
             The callback for when a message is received.
+            </summary>
+        </member>
+        <member name="P:DidasUtils.Net.Client.IsListening">
+            <summary>
+            Checks wether the receive thread is running.
+            </summary>
+        </member>
+        <member name="P:DidasUtils.Net.Client.ReceiverBusy">
+            <summary>
+            Checks wether the receiver is working on an incoming message.
             </summary>
         </member>
         <member name="T:DidasUtils.Net.Client.MessageReceived">
