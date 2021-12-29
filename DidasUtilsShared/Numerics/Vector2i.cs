@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 
 namespace DidasUtils.Numerics
 {
@@ -35,6 +36,14 @@ namespace DidasUtils.Numerics
         /// <param name="x"></param>
         /// <param name="y"></param>
         public Vector2i(int x, int y) { this.x = x; this.y = y; }
+
+
+
+        /// <summary>
+        /// Convertes the Vector2i to a Vector2.
+        /// </summary>
+        /// <returns></returns>
+        public Vector2 ToVector2() => new Vector2(x, y);
 
 
 

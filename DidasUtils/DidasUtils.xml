@@ -923,6 +923,12 @@
             <param name="x"></param>
             <param name="y"></param>
         </member>
+        <member name="M:DidasUtils.Numerics.Vector2i.ToVector2">
+            <summary>
+            Convertes the Vector2i to a Vector2.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:DidasUtils.Numerics.Vector2i.DotProduct(DidasUtils.Numerics.Vector2i,DidasUtils.Numerics.Vector2i)">
             <summary>
             Calculates the dot product between two vectors.
@@ -1022,6 +1028,12 @@
             <param name="x"></param>
             <param name="y"></param>
             <param name="z"></param>
+        </member>
+        <member name="M:DidasUtils.Numerics.Vector3i.ToVector3">
+            <summary>
+            Convertes the Vector3i to a Vector3.
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:DidasUtils.Numerics.Vector3i.DotProduct(DidasUtils.Numerics.Vector3i,DidasUtils.Numerics.Vector3i)">
             <summary>
