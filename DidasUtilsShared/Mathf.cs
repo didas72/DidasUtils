@@ -13,7 +13,8 @@ namespace DidasUtils
 		/// <param name="dividend"></param>
 		/// <param name="divisor"></param>
 		/// <returns></returns>
-		public static int DivideRoundUp(int dividend, int divisor) => dividend / divisor + ((dividend % divisor == 0) ? 0 : 1);
+		public static int DivideRoundUp(int a, int b) => (a - 1) / b + 1;
+		//OLD: public static int DivideRoundUp(int dividend, int divisor) => dividend / divisor + ((dividend % divisor == 0) ? 0 : 1);
 
 
 
