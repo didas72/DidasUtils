@@ -5,6 +5,7 @@ namespace DidasUtils.Data
     /// <summary>
     /// Holds a variable size list of bits (bools).
     /// </summary>
+    /// <remarks>Booleans are stored in order, but all other values are stored in reverse bit order. Do not mix bool methods with other methods</remarks>
     public class BitList
     {
         //1010 => [0] = false and [1] = true
@@ -118,7 +119,7 @@ namespace DidasUtils.Data
 
 
         /// <summary>
-        /// Appends a value to the end of the list.
+        /// Appends a bool to the end of the list.
         /// </summary>
         /// <param name="value"></param>
         public void Add(bool value)
@@ -127,7 +128,7 @@ namespace DidasUtils.Data
             FastSet(Count - 1, value);
         }
         /// <summary>
-        /// Appends a range of values to the end of the list.
+        /// Appends a range of packed bools to the end of the list.
         /// </summary>
         /// <param name="values"></param>
         /// <exception cref="ArgumentNullException"></exception>
@@ -142,6 +143,54 @@ namespace DidasUtils.Data
 
             while (eHead < values.Length)
                 FastSet(iHead++, values[eHead++]);
+        }
+        /// <summary>
+        /// Appends a range of packed bools to the end of the list.
+        /// </summary>
+        /// <param name="values"></param>
+        /// <param name="count"></param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
+        public void AddRange(byte[] values, int count)
+        {
+            if (count <= 0) throw new ArgumentOutOfRangeException(nameof(count));
+            if (values == null) throw new ArgumentNullException(nameof(values));
+            if (count > values.Length * 8) throw new ArgumentOutOfRangeException(nameof(count));
+
+            int eHead = 0, iHead = count;
+            Count += count;
+            EnsureCapacity(Count);
+
+            while (eHead < count)
+            {
+                int B = eHead / 8, b = eHead % 8;
+                FastSet(iHead++, (values[B] & 1 << b) != 0);
+                eHead++;
+            }
+        }
+        /// <summary>
+        /// Appends a range of packed bools to the end of the list.
+        /// </summary>
+        /// <param name="values"></param>
+        /// <param name="count"></param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
+        public void AddRange(int[] values, int count)
+        {
+            if (count <= 0) throw new ArgumentOutOfRangeException(nameof(count));
+            if (values == null) throw new ArgumentNullException(nameof(values));
+            if (count > values.Length * 8 * sizeof(int)) throw new ArgumentOutOfRangeException(nameof(count));
+
+            int eHead = 0, iHead = count;
+            Count += count;
+            EnsureCapacity(Count);
+
+            while (eHead < count)
+            {
+                int B = eHead / (8 * sizeof(int)), b = eHead % (8 * sizeof(int));
+                FastSet(iHead++, (values[B] & 1 << b) != 0);
+                eHead++;
+            }
         }
         /// <summary>
         /// Pops the last element of the list and returns it.
@@ -225,6 +274,322 @@ namespace DidasUtils.Data
             if (finalCount < 0) throw new ArgumentOutOfRangeException(nameof(finalCount));
             Count = finalCount;
             Clean();
+        }
+
+
+
+        /// <summary>
+        /// Gets a byte from the BitList at the given index, padding with zeros the empty space.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public byte GetByte(int index)
+        {
+            if (index < 0) throw new ArgumentOutOfRangeException(nameof(index));
+            if (index >= Count) throw new ArgumentOutOfRangeException(nameof(index));
+
+            byte result = 0;
+
+            int bit = 0;
+
+            while (bit < 8 && bit + index < Count)
+            {
+                if (FastGet(index + bit))
+                    result |= (byte)(1 << bit);
+
+                bit++;
+            }
+
+            return result;
+        }
+        /// <summary>
+        /// Gets a sbyte from the BitList at the given index, padding with zeros the empty space.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public sbyte GetSbyte(int index)
+        {
+            if (index < 0) throw new ArgumentOutOfRangeException(nameof(index));
+            if (index >= Count) throw new ArgumentOutOfRangeException(nameof(index));
+
+            sbyte result = 0;
+
+            int bit = 0;
+
+            while (bit < 8 && bit + index < Count)
+            {
+                if (FastGet(index + bit))
+                    result |= (sbyte)(1 << bit);
+
+                bit++;
+            }
+
+            return result;
+        }
+        /// <summary>
+        /// Gets an ushort from the BitList at the given index, padding with zeros the empty space.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public ushort GetUshort(int index)
+        {
+            if (index < 0) throw new ArgumentOutOfRangeException(nameof(index));
+            if (index >= Count) throw new ArgumentOutOfRangeException(nameof(index));
+
+            ushort result = 0;
+
+            int bit = 0;
+
+            while (bit < 16 && bit + index < Count)
+            {
+                if (FastGet(index + bit))
+                    result |= (ushort)(1 << bit);
+
+                bit++;
+            }
+
+            return result;
+        }
+        /// <summary>
+        /// Gets a short from the BitList at the given index, padding with zeros the empty space.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public short GetShort(int index)
+        {
+            if (index < 0) throw new ArgumentOutOfRangeException(nameof(index));
+            if (index >= Count) throw new ArgumentOutOfRangeException(nameof(index));
+
+            short result = 0;
+
+            int bit = 0;
+
+            while (bit < 16 && bit + index < Count)
+            {
+                if (FastGet(index + bit))
+                    result |= (short)(1 << bit);
+
+                bit++;
+            }
+
+            return result;
+        }
+        /// <summary>
+        /// Gets an uint from the BitList at the given index, padding with zeros the empty space.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public uint GetUint(int index)
+        {
+            if (index < 0) throw new ArgumentOutOfRangeException(nameof(index));
+            if (index >= Count) throw new ArgumentOutOfRangeException(nameof(index));
+
+            uint result = 0;
+
+            int bit = 0;
+
+            while (bit < 32 && bit + index < Count)
+            {
+                if (FastGet(index + bit))
+                    result |= (uint)(1 << bit);
+
+                bit++;
+            }
+
+            return result;
+        }
+        /// <summary>
+        /// Gets an int from the BitList at the given index, padding with zeros the empty space.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public int GetInt(int index)
+        {
+            if (index < 0) throw new ArgumentOutOfRangeException(nameof(index));
+            if (index >= Count) throw new ArgumentOutOfRangeException(nameof(index));
+
+            int result = 0;
+
+            int bit = 0;
+
+            while (bit < 32 && bit + index < Count)
+            {
+                if (FastGet(index + bit))
+                    result |= (int)(1 << bit);
+
+                bit++;
+            }
+
+            return result;
+        }
+        /// <summary>
+        /// Gets an ulong from the BitList at the given index, padding with zeros the empty space.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public ulong GetUlong(int index)
+        {
+            if (index < 0) throw new ArgumentOutOfRangeException(nameof(index));
+            if (index >= Count) throw new ArgumentOutOfRangeException(nameof(index));
+
+            ulong result = 0;
+
+            int bit = 0;
+
+            while (bit < 64 && bit + index < Count)
+            {
+                if (FastGet(index + bit))
+                {
+                    ulong v = (ulong)(1 << bit);
+                    result |= v;
+                }
+
+                bit++;
+            }
+
+            return result;
+        }
+        /// <summary>
+        /// Gets a long from the BitList at the given index, padding with zeros the empty space.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public long GetLong(int index)
+        {
+            if (index < 0) throw new ArgumentOutOfRangeException(nameof(index));
+            if (index >= Count) throw new ArgumentOutOfRangeException(nameof(index));
+
+            long result = 0;
+
+            int bit = 0;
+
+            while (bit < 64 && bit + index < Count)
+            {
+                if (FastGet(index + bit))
+                {
+                    long v = (long)(1 << bit);
+                    result |= v;
+                }
+
+                bit++;
+            }
+
+            return result;
+        }
+
+
+
+        /// <summary>
+        /// Appends a byte to the BitList.
+        /// </summary>
+        /// <param name="value"></param>
+        public void AddByte(byte value)
+        {
+            int iHead = Count;
+            Count += 8;
+            EnsureCapacity(Count);
+
+            for (int b = 7; b >= 0; b--)
+                FastSet(iHead++, (value & (1 << b)) != 0);
+        }
+        /// <summary>
+        /// Appends a sbyte to the BitList.
+        /// </summary>
+        /// <param name="value"></param>
+        public void AddSbyte(sbyte value)
+        {
+            int iHead = Count;
+            Count += 8;
+            EnsureCapacity(Count);
+
+            for (int b = 7; b >= 0; b--)
+                FastSet(iHead++, (value & (1 << b)) != 0);
+        }
+        /// <summary>
+        /// Appends an ushort to the BitList.
+        /// </summary>
+        /// <param name="value"></param>
+        public void AddUshort(ushort value)
+        {
+            int iHead = Count;
+            Count += 16;
+            EnsureCapacity(Count);
+
+            for (int b = 15; b >= 0; b--)
+                FastSet(iHead++, (value & (1 << b)) != 0);
+        }
+        /// <summary>
+        /// Appends a short to the BitList.
+        /// </summary>
+        /// <param name="value"></param>
+        public void AddShort(short value)
+        {
+            int iHead = Count;
+            Count += 16;
+            EnsureCapacity(Count);
+
+            for (int b = 15; b >= 0; b--)
+                FastSet(iHead++, (value & (1 << b)) != 0);
+        }
+        /// <summary>
+        /// Appends an uint to the BitList.
+        /// </summary>
+        /// <param name="value"></param>
+        public void AddUint(uint value)
+        {
+            int iHead = Count;
+            Count += 32;
+            EnsureCapacity(Count);
+
+            for (int b = 31; b >= 0; b--)
+                FastSet(iHead++, (value & (1 << b)) != 0);
+        }
+        /// <summary>
+        /// Appends an int to the BitList.
+        /// </summary>
+        /// <param name="value"></param>
+        public void AddInt(int value)
+        {
+            int iHead = Count;
+            Count += 32;
+            EnsureCapacity(Count);
+
+            for (int b = 31; b >= 0; b--)
+                FastSet(iHead++, (value & (1 << b)) != 0);
+        }
+        /// <summary>
+        /// Appends an ulong to the BitList.
+        /// </summary>
+        /// <param name="value"></param>
+        public void AddUlong(ulong value)
+        {
+            int iHead = Count;
+            Count += 64;
+            EnsureCapacity(Count);
+
+            for (int b = 63; b >= 0; b--)
+                FastSet(iHead++, (value & (ulong)(1 << b)) != 0);
+        }
+        /// <summary>
+        /// Appends a long to the BitList.
+        /// </summary>
+        /// <param name="value"></param>
+        public void AddLong(long value)
+        {
+            int iHead = Count;
+            Count += 64;
+            EnsureCapacity(Count);
+
+            for (int b = 63; b >= 0; b--)
+                FastSet(iHead++, (value & (long)(1 << b)) != 0);
         }
 
 

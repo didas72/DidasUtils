@@ -25,7 +25,11 @@ namespace Tester
             list.Add(false);
             list.Add(true);
             list.Add(true);
-
+            list.Add(true);
+            list.Add(true);
+            list.Add(true);
+            list.Add(true);
+            /*
             for (int i = 0; i < list.Count; i++)
                 Console.Write(list[i]);
             Console.WriteLine();
@@ -53,7 +57,10 @@ namespace Tester
 
             for (int i = 0; i < newL.Count; i++)
                 Console.Write(newL[i]);
-            Console.WriteLine();
+            Console.WriteLine();*/
+
+            byte by = list.GetByte(1);
+            Console.WriteLine(by.ToString("X2"));
 
 
             Console.ReadLine();
@@ -105,12 +112,6 @@ namespace Tester
 
             Console.WriteLine("Done");
             Console.ReadLine();
-        }
-
-
-        private static int DivRoundUp(int a, int b)
-        {
-            return (a - 1) / b + 1;
         }
 
 
