@@ -9,6 +9,7 @@
     <Import_RootNamespace>DidasUtils</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Data\BitList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ErrorCorrection\CheckSum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\SegmentedData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ErrorCorrection\ErrorProtectedBlock.cs" />

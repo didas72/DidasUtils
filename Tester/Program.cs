@@ -1,19 +1,65 @@
 ﻿using System;
+using System.Diagnostics;
 
 using DidasUtils;
 using DidasUtils.Numerics;
 using DidasUtils.ConsoleUI;
 using DidasUtils.ErrorCorrection;
+using DidasUtils.Data;
 
 namespace Tester
 {
     class Program
     {
-        
+
 
 
         static void Main(string[] args)
         {
+            BitList list = new BitList(5);
+            Console.WriteLine($"Init count {list.Count}");
+            Console.WriteLine($"Init cap {list.Capacity}");
+
+            list.Add(true);
+            list.Add(true);
+            list.Add(false);
+            list.Add(true);
+            list.Add(true);
+
+            for (int i = 0; i < list.Count; i++)
+                Console.Write(list[i]);
+            Console.WriteLine();
+
+            byte[] ser = BitList.Serialize(list);
+            for (int i = 0; i < ser.Length; i++)
+                Console.Write($"{ser[i]:X2} ");
+            Console.WriteLine();
+
+            list.AddRange(new bool[12] { true, true, true, false, false, false, true, true, true, false, false, false });
+            Console.WriteLine($"Count 2 {list.Count}");
+            Console.WriteLine($"Cap 2 {list.Capacity}");
+
+            ser = BitList.Serialize(list);
+            Console.WriteLine(ser.Length);
+            for (int i = 0; i < ser.Length; i++)
+                Console.Write($"{ser[i]:X2}");
+            Console.WriteLine();
+
+            for (int i = 0; i < list.Count; i++)
+                Console.Write(list[i]);
+            Console.WriteLine();
+
+            BitList newL = BitList.Deserialize(ser);
+
+            for (int i = 0; i < newL.Count; i++)
+                Console.Write(newL[i]);
+            Console.WriteLine();
+
+
+            Console.ReadLine();
+
+            return;
+
             Random rdm = new Random();
 
             for (int i = 0; i < 10000; i++)
@@ -59,6 +105,12 @@ namespace Tester
 
             Console.WriteLine("Done");
             Console.ReadLine();
+        }
+
+
+        private static int DivRoundUp(int a, int b)
+        {
+            return (a - 1) / b + 1;
         }
 
 

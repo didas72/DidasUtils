@@ -4,6 +4,102 @@
         <name>DidasUtils</name>
     </assembly>
     <members>
+        <member name="P:DidasUtils.Data.BitList.Item(System.Int32)">
+            <summary>
+            Gets or sets the value at the given index.
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="P:DidasUtils.Data.BitList.Count">
+            <summary>
+            The count of values stored in the list.
+            </summary>
+        </member>
+        <member name="P:DidasUtils.Data.BitList.Capacity">
+            <summary>
+            The current capacity of the list.
+            </summary>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.#ctor">
+            <summary>
+            Initializes an empty BitList.
+            </summary>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.#ctor(System.Int32)">
+            <summary>
+            Initializes a BitList with a minimum given starting capacity.
+            </summary>
+            <param name="capacity"></param>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.#ctor(System.Boolean[])">
+            <summary>
+            Initializes a BitList holding each bit in the given array.
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.#ctor(System.Byte[])">
+            <summary>
+            Initializes a BitList holding each bit in the given array.
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.#ctor(System.Int32[])">
+            <summary>
+            Initializes a BitList holding each bit in the given array.
+            </summary>
+            <param name="source"></param>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.FastSet(System.Int32,System.Boolean)">
+            <summary>
+            Sets the value at a given index without checking if the index is within bounds.
+            </summary>
+            <param name="index">The index of the value to set.</param>
+            <param name="value">The value to be set to.</param>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.FastGet(System.Int32)">
+            <summary>
+            Gets the value at a given index without checking if the index is within bounds.
+            </summary>
+            <param name="index">The index of the value to set.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.Serialize(DidasUtils.Data.BitList)">
+            <summary>
+            Serializes a BitList into a byte array.
+            </summary>
+            <param name="list">The list to serialize.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.Deserialize(System.Byte[])">
+            <summary>
+            Deserializes a BitList from a byte array.
+            </summary>
+            <param name="source">The byte array to deserialize from.</param>
+            <returns></returns>
+        </member>
+        <member name="T:DidasUtils.Data.SegmentedData">
+            <summary>
+            Class to enable safer tranfer of data over a NetworkStream.
+            </summary>
+        </member>
+        <member name="M:DidasUtils.Data.SegmentedData.SendToStream(System.Byte[],System.IO.Stream,System.Int32)">
+            <summary>
+            Sends a byte array in a safer way.
+            </summary>
+            <param name="data">The byte array containing the data to be sent.</param>
+            <param name="stream">The stream to send the data to.</param>
+            <param name="blockSize">The size of the blocks to be sent.</param>
+        </member>
+        <member name="M:DidasUtils.Data.SegmentedData.ReadFromStream(System.IO.Stream,System.Int32)">
+            <summary>
+            Reads a byte array received in blocks.
+            </summary>
+            <param name="stream">The stream to read from.</param>
+            <param name="blockSize">The expected size of the blocks to receive.</param>
+            <returns></returns>
+        </member>
         <member name="T:DidasUtils.ErrorCorrection.CheckSum">
             <summary>
             Class that holds methods to assist with the creation of checksums.
@@ -174,27 +270,6 @@
             Calculates the 32-bit Flether checksum for the given source uhsorts.
             </summary>
             <param name="source"></param>
-            <returns></returns>
-        </member>
-        <member name="T:DidasUtils.Data.SegmentedData">
-            <summary>
-            Class to enable safer tranfer of data over a NetworkStream.
-            </summary>
-        </member>
-        <member name="M:DidasUtils.Data.SegmentedData.SendToStream(System.Byte[],System.IO.Stream,System.Int32)">
-            <summary>
-            Sends a byte array in a safer way.
-            </summary>
-            <param name="data">The byte array containing the data to be sent.</param>
-            <param name="stream">The stream to send the data to.</param>
-            <param name="blockSize">The size of the blocks to be sent.</param>
-        </member>
-        <member name="M:DidasUtils.Data.SegmentedData.ReadFromStream(System.IO.Stream,System.Int32)">
-            <summary>
-            Reads a byte array received in blocks.
-            </summary>
-            <param name="stream">The stream to read from.</param>
-            <param name="blockSize">The expected size of the blocks to receive.</param>
             <returns></returns>
         </member>
         <member name="T:DidasUtils.Extensions.ExtensionMethods">
@@ -923,6 +998,12 @@
             <param name="x"></param>
             <param name="y"></param>
         </member>
+        <member name="M:DidasUtils.Numerics.Vector2i.ToVector2">
+            <summary>
+            Convertes the Vector2i to a Vector2.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:DidasUtils.Numerics.Vector2i.DotProduct(DidasUtils.Numerics.Vector2i,DidasUtils.Numerics.Vector2i)">
             <summary>
             Calculates the dot product between two vectors.
@@ -1022,6 +1103,12 @@
             <param name="x"></param>
             <param name="y"></param>
             <param name="z"></param>
+        </member>
+        <member name="M:DidasUtils.Numerics.Vector3i.ToVector3">
+            <summary>
+            Convertes the Vector3i to a Vector3.
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:DidasUtils.Numerics.Vector3i.DotProduct(DidasUtils.Numerics.Vector3i,DidasUtils.Numerics.Vector3i)">
             <summary>
