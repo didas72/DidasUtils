@@ -4,6 +4,12 @@
         <name>DidasUtils</name>
     </assembly>
     <members>
+        <member name="T:DidasUtils.Data.BitList">
+            <summary>
+            Holds a variable size list of bits (bools).
+            </summary>
+            <remarks>Booleans are stored in order, but all other values are stored in reverse bit order. Do not mix bool methods with other methods</remarks>
+        </member>
         <member name="P:DidasUtils.Data.BitList.Item(System.Int32)">
             <summary>
             Gets or sets the value at the given index.
@@ -50,6 +56,205 @@
             Initializes a BitList holding each bit in the given array.
             </summary>
             <param name="source"></param>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.Add(System.Boolean)">
+            <summary>
+            Appends a bool to the end of the list.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.AddRange(System.Boolean[])">
+            <summary>
+            Appends a range of packed bools to the end of the list.
+            </summary>
+            <param name="values"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.AddRange(System.Byte[],System.Int32)">
+            <summary>
+            Appends a range of packed bools to the end of the list.
+            </summary>
+            <param name="values"></param>
+            <param name="count"></param>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.AddRange(System.Int32[],System.Int32)">
+            <summary>
+            Appends a range of packed bools to the end of the list.
+            </summary>
+            <param name="values"></param>
+            <param name="count"></param>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.Pop">
+            <summary>
+            Pops the last element of the list and returns it.
+            </summary>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.Pop(System.Int32)">
+            <summary>
+            Removes the last <paramref name="count"/> elements from the list.
+            </summary>
+            <param name="count"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.PopAndTrim(System.Int32)">
+            <summary>
+            Removes the last <paramref name="count"/> elements and trims the list.
+            </summary>
+            <param name="count"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.Clear">
+            <summary>
+            Empties the list.
+            </summary>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.ClearAndTrim">
+            <summary>
+            Empties and trims the list.
+            </summary>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.SetMinCapacity(System.Int32)">
+            <summary>
+            Ensures the list has a minimum capacity.
+            </summary>
+            <param name="capacity"></param>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.Trim">
+            <summary>
+            Trims off unsused capacity from the list to reduce memory usage
+            </summary>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.Truncate(System.Int32)">
+            <summary>
+            Truncates the list to hole only a given amount of values.
+            </summary>
+            <param name="finalCount"></param>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.TruncateAndTrim(System.Int32)">
+            <summary>
+            Truncates the list to hole only a given amount of values and then trims it.
+            </summary>
+            <param name="finalCount"></param>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.GetByte(System.Int32)">
+            <summary>
+            Gets a byte from the BitList at the given index, padding with zeros the empty space.
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.GetSbyte(System.Int32)">
+            <summary>
+            Gets a sbyte from the BitList at the given index, padding with zeros the empty space.
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.GetUshort(System.Int32)">
+            <summary>
+            Gets an ushort from the BitList at the given index, padding with zeros the empty space.
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.GetShort(System.Int32)">
+            <summary>
+            Gets a short from the BitList at the given index, padding with zeros the empty space.
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.GetUint(System.Int32)">
+            <summary>
+            Gets an uint from the BitList at the given index, padding with zeros the empty space.
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.GetInt(System.Int32)">
+            <summary>
+            Gets an int from the BitList at the given index, padding with zeros the empty space.
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.GetUlong(System.Int32)">
+            <summary>
+            Gets an ulong from the BitList at the given index, padding with zeros the empty space.
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.GetLong(System.Int32)">
+            <summary>
+            Gets a long from the BitList at the given index, padding with zeros the empty space.
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.AddByte(System.Byte)">
+            <summary>
+            Appends a byte to the BitList.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.AddSbyte(System.SByte)">
+            <summary>
+            Appends a sbyte to the BitList.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.AddUshort(System.UInt16)">
+            <summary>
+            Appends an ushort to the BitList.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.AddShort(System.Int16)">
+            <summary>
+            Appends a short to the BitList.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.AddUint(System.UInt32)">
+            <summary>
+            Appends an uint to the BitList.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.AddInt(System.Int32)">
+            <summary>
+            Appends an int to the BitList.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.AddUlong(System.UInt64)">
+            <summary>
+            Appends an ulong to the BitList.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:DidasUtils.Data.BitList.AddLong(System.Int64)">
+            <summary>
+            Appends a long to the BitList.
+            </summary>
+            <param name="value"></param>
         </member>
         <member name="M:DidasUtils.Data.BitList.FastSet(System.Int32,System.Boolean)">
             <summary>
@@ -387,153 +592,6 @@
             <param name="queue"></param>
             <param name="items"></param>
         </member>
-        <member name="T:DidasUtils.Logging.Log">
-            <summary>
-            Class containing methods to log events to a file and/or print them to console.
-            </summary>
-        </member>
-        <member name="P:DidasUtils.Logging.Log.LogPath">
-            <summary>
-            The path to the log file.
-            </summary>
-        </member>
-        <member name="P:DidasUtils.Logging.Log.LogFile">
-            <summary>
-            The name of the log file.
-            </summary>
-        </member>
-        <member name="P:DidasUtils.Logging.Log.UsePrint">
-            <summary>
-            Toggles wether the logs should be printed to the console.
-            </summary>
-        </member>
-        <member name="P:DidasUtils.Logging.Log.Initialized">
-            <summary>
-            Wether or not the log has been initialzied yet.
-            </summary>
-        </member>
-        <member name="T:DidasUtils.Logging.Log.EventType">
-            <summary>
-            Enum that specifies the accepted event types.
-            </summary>
-        </member>
-        <member name="F:DidasUtils.Logging.Log.EventType.Info">
-            <summary>
-            Informative only event. Not a concern to the user nor to the programmer.
-            </summary>
-        </member>
-        <member name="F:DidasUtils.Logging.Log.EventType.Warning">
-            <summary>
-            Potentially problematic event. Not much of a concern to the user but something for the programmer to think about.
-            </summary>
-        </member>
-        <member name="F:DidasUtils.Logging.Log.EventType.HighWarning">
-            <summary>
-            A potentially problematic even, possibly leading to a bigger probelm. A concern to both the user and the programmer.
-            </summary>
-        </member>
-        <member name="F:DidasUtils.Logging.Log.EventType.Error">
-            <summary>
-            An exception type event. A concern to both the user and the programmer.
-            </summary>
-        </member>
-        <member name="F:DidasUtils.Logging.Log.EventType.Fatal">
-            <summary>
-            A catastrophic event, definitely leading to a crash or controlled crash.
-            </summary>
-        </member>
-        <member name="F:DidasUtils.Logging.Log.EventType.Performance">
-            <summary>
-            Informative only event, reporting program performance. Useful for both the user and the programmer.
-            </summary>
-        </member>
-        <member name="F:DidasUtils.Logging.Log.EventType.DevInfo">
-            <summary>
-            Informative only event, reporting program performance. Useful for the programmer only and might be confusing for the user.
-            </summary>
-        </member>
-        <member name="M:DidasUtils.Logging.Log.InitLog(System.String)">
-            <summary>
-            Initializes the log file. 
-            </summary>
-            <param name="path">The path to the log file.</param>
-            <remarks>Must be called once before calling any other log related method.</remarks>
-        </member>
-        <member name="M:DidasUtils.Logging.Log.InitLog(System.String,System.String)">
-            <summary>
-            Initializes the log file. 
-            </summary>
-            <param name="path">The path to the log file.</param>
-            <param name="logFile">The file name for the log.</param>
-            <remarks>Must be called once before calling any other log related method.</remarks>
-        </member>
-        <member name="M:DidasUtils.Logging.Log.InitConsole">
-            <summary>
-            Initializes console for use with this class.
-            </summary>
-        </member>
-        <member name="M:DidasUtils.Logging.Log.LogEvent(System.String,System.String)">
-            <summary>
-            Logs an event of type EventType.Info, printing to screen and saving to file.
-            </summary>
-            <param name="msg">The log message.</param>
-            <param name="sender">The name of the sender.</param>
-        </member>
-        <member name="M:DidasUtils.Logging.Log.LogEvent(DidasUtils.Logging.Log.EventType,System.String,System.String)">
-            <summary>
-            Logs an event, printing to screen and saving to file.
-            </summary>
-            <param name="eventType">The type of event to be logged.</param>
-            <param name="msg">The log message.</param>
-            <param name="sender">The name of the sender.</param>
-        </member>
-        <member name="M:DidasUtils.Logging.Log.LogEvent(DidasUtils.Logging.Log.EventType,System.String,System.String,System.Boolean)">
-            <summary>
-            Logs an event, optionally printing it to screen.
-            </summary>
-            <param name="eventType">The type of event to be logged.</param>
-            <param name="msg">The log message.</param>
-            <param name="sender">The name of the sender.</param>
-            <param name="writeToScreen">>Wether or not to print to screen.</param>
-        </member>
-        <member name="M:DidasUtils.Logging.Log.LogEvent(DidasUtils.Logging.Log.EventType,System.String,System.String,System.Boolean,System.Boolean)">
-            <summary>
-            Logs an event, optionally printing it to screen and saving to file.
-            </summary>
-            <param name="eventType">The type of event to be logged.</param>
-            <param name="msg">The log message.</param>
-            <param name="sender">The name of the sender.</param>
-            <param name="writeToScreen">Wether or not to print to screen.</param>
-            <param name="writeToFile">Wether or not to save to file.</param>
-        </member>
-        <member name="M:DidasUtils.Logging.Log.LogException(System.String,System.String,System.Exception)">
-            <summary>
-            Logs an exception with a message.
-            </summary>
-            <param name="msg"></param>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:DidasUtils.Logging.Log.Print(System.String)">
-            <summary>
-            Prints a message to screen without any other log information.
-            </summary>
-            <param name="msg">The message to print to screen.</param>
-        </member>
-        <member name="M:DidasUtils.Logging.Log.SafeWriteLine(System.String)">
-            <summary>
-            Writes a line to console in a thread safe way.
-            </summary>
-            <param name="msg">The message to print to screen.</param>
-        </member>
-        <member name="M:DidasUtils.Logging.Log.TryWriteLog(System.String,System.String)">
-            <summary>
-            Tries to write log to file, attempting up to ten times.
-            </summary>
-            <param name="path">The path to the log file.</param>
-            <param name="log">The log to write to file.</param>
-            <returns>Boolean indicating the operation's success.</returns>
-        </member>
         <member name="T:DidasUtils.Files.SettingsDocument">
             <summary>
             Class that represents a settings file and contains useful methods for interaction with such files.
@@ -789,6 +847,153 @@
             <param name="outDir">The directory to store the decompressed files to.</param>
             <returns>Boolean indicating the operation's success.</returns>
         </member>
+        <member name="T:DidasUtils.Logging.Log">
+            <summary>
+            Class containing methods to log events to a file and/or print them to console.
+            </summary>
+        </member>
+        <member name="P:DidasUtils.Logging.Log.LogPath">
+            <summary>
+            The path to the log file.
+            </summary>
+        </member>
+        <member name="P:DidasUtils.Logging.Log.LogFile">
+            <summary>
+            The name of the log file.
+            </summary>
+        </member>
+        <member name="P:DidasUtils.Logging.Log.UsePrint">
+            <summary>
+            Toggles wether the logs should be printed to the console.
+            </summary>
+        </member>
+        <member name="P:DidasUtils.Logging.Log.Initialized">
+            <summary>
+            Wether or not the log has been initialzied yet.
+            </summary>
+        </member>
+        <member name="T:DidasUtils.Logging.Log.EventType">
+            <summary>
+            Enum that specifies the accepted event types.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.Logging.Log.EventType.Info">
+            <summary>
+            Informative only event. Not a concern to the user nor to the programmer.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.Logging.Log.EventType.Warning">
+            <summary>
+            Potentially problematic event. Not much of a concern to the user but something for the programmer to think about.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.Logging.Log.EventType.HighWarning">
+            <summary>
+            A potentially problematic even, possibly leading to a bigger probelm. A concern to both the user and the programmer.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.Logging.Log.EventType.Error">
+            <summary>
+            An exception type event. A concern to both the user and the programmer.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.Logging.Log.EventType.Fatal">
+            <summary>
+            A catastrophic event, definitely leading to a crash or controlled crash.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.Logging.Log.EventType.Performance">
+            <summary>
+            Informative only event, reporting program performance. Useful for both the user and the programmer.
+            </summary>
+        </member>
+        <member name="F:DidasUtils.Logging.Log.EventType.DevInfo">
+            <summary>
+            Informative only event, reporting program performance. Useful for the programmer only and might be confusing for the user.
+            </summary>
+        </member>
+        <member name="M:DidasUtils.Logging.Log.InitLog(System.String)">
+            <summary>
+            Initializes the log file. 
+            </summary>
+            <param name="path">The path to the log file.</param>
+            <remarks>Must be called once before calling any other log related method.</remarks>
+        </member>
+        <member name="M:DidasUtils.Logging.Log.InitLog(System.String,System.String)">
+            <summary>
+            Initializes the log file. 
+            </summary>
+            <param name="path">The path to the log file.</param>
+            <param name="logFile">The file name for the log.</param>
+            <remarks>Must be called once before calling any other log related method.</remarks>
+        </member>
+        <member name="M:DidasUtils.Logging.Log.InitConsole">
+            <summary>
+            Initializes console for use with this class.
+            </summary>
+        </member>
+        <member name="M:DidasUtils.Logging.Log.LogEvent(System.String,System.String)">
+            <summary>
+            Logs an event of type EventType.Info, printing to screen and saving to file.
+            </summary>
+            <param name="msg">The log message.</param>
+            <param name="sender">The name of the sender.</param>
+        </member>
+        <member name="M:DidasUtils.Logging.Log.LogEvent(DidasUtils.Logging.Log.EventType,System.String,System.String)">
+            <summary>
+            Logs an event, printing to screen and saving to file.
+            </summary>
+            <param name="eventType">The type of event to be logged.</param>
+            <param name="msg">The log message.</param>
+            <param name="sender">The name of the sender.</param>
+        </member>
+        <member name="M:DidasUtils.Logging.Log.LogEvent(DidasUtils.Logging.Log.EventType,System.String,System.String,System.Boolean)">
+            <summary>
+            Logs an event, optionally printing it to screen.
+            </summary>
+            <param name="eventType">The type of event to be logged.</param>
+            <param name="msg">The log message.</param>
+            <param name="sender">The name of the sender.</param>
+            <param name="writeToScreen">>Wether or not to print to screen.</param>
+        </member>
+        <member name="M:DidasUtils.Logging.Log.LogEvent(DidasUtils.Logging.Log.EventType,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Logs an event, optionally printing it to screen and saving to file.
+            </summary>
+            <param name="eventType">The type of event to be logged.</param>
+            <param name="msg">The log message.</param>
+            <param name="sender">The name of the sender.</param>
+            <param name="writeToScreen">Wether or not to print to screen.</param>
+            <param name="writeToFile">Wether or not to save to file.</param>
+        </member>
+        <member name="M:DidasUtils.Logging.Log.LogException(System.String,System.String,System.Exception)">
+            <summary>
+            Logs an exception with a message.
+            </summary>
+            <param name="msg"></param>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:DidasUtils.Logging.Log.Print(System.String)">
+            <summary>
+            Prints a message to screen without any other log information.
+            </summary>
+            <param name="msg">The message to print to screen.</param>
+        </member>
+        <member name="M:DidasUtils.Logging.Log.SafeWriteLine(System.String)">
+            <summary>
+            Writes a line to console in a thread safe way.
+            </summary>
+            <param name="msg">The message to print to screen.</param>
+        </member>
+        <member name="M:DidasUtils.Logging.Log.TryWriteLog(System.String,System.String)">
+            <summary>
+            Tries to write log to file, attempting up to ten times.
+            </summary>
+            <param name="path">The path to the log file.</param>
+            <param name="log">The log to write to file.</param>
+            <returns>Boolean indicating the operation's success.</returns>
+        </member>
         <member name="T:DidasUtils.Mathf">
             <summary>
             Class that contains several math-related methods.
@@ -888,26 +1093,6 @@
             <param name="angle"></param>
             <returns></returns>
         </member>
-        <member name="T:DidasUtils.Net.Networking">
-            <summary>
-            Holds methods related to networking.
-            </summary>
-        </member>
-        <member name="M:DidasUtils.Net.Networking.TryDownloadFile(System.String,System.String)">
-            <summary>
-            Attempts to download a file.
-            </summary>
-            <param name="url">The URL to downlaod from.</param>
-            <param name="path">The path to store the file.</param>
-            <returns>Boolean indicating the operation's success.</returns>
-        </member>
-        <member name="M:DidasUtils.Net.Networking.IsUrlUp(System.String)">
-            <summary>
-            Checks wether a given URL is accessible.
-            </summary>
-            <param name="url"></param>
-            <returns></returns>
-        </member>
         <member name="T:DidasUtils.Net.Client">
             <summary>
             Wrapper class that contains a TcpClient and useful networking methods.
@@ -965,6 +1150,26 @@
             <summary>
             Disconnects the TcpClient and disposes all resources.
             </summary>
+        </member>
+        <member name="T:DidasUtils.Net.Networking">
+            <summary>
+            Holds methods related to networking.
+            </summary>
+        </member>
+        <member name="M:DidasUtils.Net.Networking.TryDownloadFile(System.String,System.String)">
+            <summary>
+            Attempts to download a file.
+            </summary>
+            <param name="url">The URL to downlaod from.</param>
+            <param name="path">The path to store the file.</param>
+            <returns>Boolean indicating the operation's success.</returns>
+        </member>
+        <member name="M:DidasUtils.Net.Networking.IsUrlUp(System.String)">
+            <summary>
+            Checks wether a given URL is accessible.
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
         </member>
         <member name="T:DidasUtils.Numerics.Vector2i">
             <summary>

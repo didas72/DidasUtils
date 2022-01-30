@@ -3,9 +3,12 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Authors>Didas72</Authors>
-    <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl>https://github.com/didas72/DidasUtils</RepositoryUrl>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DebugType>embedded</DebugType>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Description>Utility library by Didas72</Description>
+    <Version>0.1.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -15,6 +18,12 @@
     <DocumentationFile>E:\dev\C#\DidasUtils\DidasUtils\DidasUtils.xml</DocumentationFile>
   </PropertyGroup>
 
-  <Import Project="..\DidasUtilsShared\DidasUtilsShared.projitems" Label="Shared" />
+  <ItemGroup>
+    <None Remove="inc\7za.exe" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="inc\7za.exe" />
+  </ItemGroup>
 
 </Project>
