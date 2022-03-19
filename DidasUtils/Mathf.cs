@@ -10,8 +10,8 @@ namespace DidasUtils
 		/// <summary>
 		/// Calculates the rounded up quotient of an integer division.
 		/// </summary>
-		/// <param name="dividend"></param>
-		/// <param name="divisor"></param>
+		/// <param name="a"></param>
+		/// <param name="b"></param>
 		/// <returns></returns>
 		public static int DivideRoundUp(int a, int b) => (a - 1) / b + 1;
 		//OLD: public static int DivideRoundUp(int dividend, int divisor) => dividend / divisor + ((dividend % divisor == 0) ? 0 : 1);
