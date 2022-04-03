@@ -654,7 +654,7 @@ namespace DidasUtils.Data
         public static BitList Deserialize(byte[] source)
         {
             int count = BitConverter.ToInt32(source, 0);
-            BitList list = new BitList(count);
+            BitList list = new(count);
             Buffer.BlockCopy(source, sizeof(int), list.data, 0, source.Length - sizeof(int));
 
             return list;

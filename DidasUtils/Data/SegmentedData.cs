@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 
 namespace DidasUtils.Data
 {
@@ -74,11 +75,13 @@ namespace DidasUtils.Data
             if (blockSize <= 256)
                 throw new ArgumentException("Block size must be at least 256 bytes.");
 
-            List<byte> bytes = new List<byte>();
+            List<byte> bytes = new();
 
             while (true)
             {
                 byte[] block = new byte[blockSize];
+
+                while (stream.Length - stream.Position < blockSize) Thread.Sleep(1);
 
                 stream.Read(block, 0, blockSize);
 

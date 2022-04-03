@@ -1003,8 +1003,8 @@
             <summary>
             Calculates the rounded up quotient of an integer division.
             </summary>
-            <param name="dividend"></param>
-            <param name="divisor"></param>
+            <param name="a"></param>
+            <param name="b"></param>
             <returns></returns>
         </member>
         <member name="M:DidasUtils.Mathf.Clamp(System.Byte,System.Byte,System.Byte)">
