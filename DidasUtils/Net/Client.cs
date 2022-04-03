@@ -18,7 +18,7 @@ namespace DidasUtils.Net
         /// <summary>
         /// The callback for when a message is received.
         /// </summary>
-        public event EventHandler<byte[]> messageReceived;
+        public event EventHandler<byte[]> MessageReceived;
         /// <summary>
         /// Checks wether the receive thread is running.
         /// </summary>
@@ -124,7 +124,7 @@ namespace DidasUtils.Net
                         ReceivedMessages++;
                         ReceiverBusy = true;
                         byte[] buffer = SegmentedData.ReadFromStream(netStream, blockSize);
-                        messageReceived?.Invoke(this, buffer);
+                        MessageReceived?.Invoke(this, buffer);
                         ReceiverBusy = false;
                     }
                     else

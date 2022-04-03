@@ -145,6 +145,8 @@ Start time {now.Hour}:{now.Minute}:{now.Second}
         /// <param name="writeToFile">Wether or not to save to file.</param>
         public static void LogEvent(EventType eventType, string msg, string sender, bool writeToScreen, bool writeToFile)
         {
+            if (!Initialized) return;
+
             DateTime now = DateTime.Now;
 
             string log = $"[{now.Hour:00}:{now.Minute:00}:{now.Second:00}] {sender}: [{eventType}] {msg}";
@@ -270,7 +272,7 @@ Start time {now.Hour}:{now.Minute}:{now.Second}
 
     static class ConsoleLock
     {
-        public static UseForConsoleLock console = new UseForConsoleLock();
+        public static UseForConsoleLock console = new();
 
         public class UseForConsoleLock
         {

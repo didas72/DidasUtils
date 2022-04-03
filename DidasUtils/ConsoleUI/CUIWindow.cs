@@ -193,7 +193,7 @@ namespace DidasUtils.ConsoleUI
                 try
                 {
                     CUIElement element = elements[i];
-                    Vector2i offset = new Vector2i(0, 1);
+                    Vector2i offset = new(0, 1);
 
                     DrawElement(element, offset);
                 }

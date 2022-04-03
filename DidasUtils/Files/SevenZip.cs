@@ -15,7 +15,7 @@ namespace DidasUtils.Files
         /// <param name="outDir">The output file.</param>
         public static void Compress7z(string sourceDir, string outDir)
         {
-            ProcessStartInfo i = new ProcessStartInfo
+            ProcessStartInfo i = new()
             {
                 FileName = "7za.exe",
                 Arguments = $"a {outDir} {sourceDir}",
@@ -36,7 +36,7 @@ namespace DidasUtils.Files
         /// <param name="outDir">The directory to store the decompressed files to.</param>
         public static void Decompress7z(string sourceDir, string outDir)
         {
-            ProcessStartInfo i = new ProcessStartInfo
+            ProcessStartInfo i = new()
             {
                 FileName = "7za.exe",
                 Arguments = $"x {sourceDir} -o{outDir} -r",

@@ -17,7 +17,7 @@ namespace DidasUtils.Net
         {
             bool ret = true;
 
-            WebClient client = new WebClient();
+            WebClient client = new();
 
             try
             {

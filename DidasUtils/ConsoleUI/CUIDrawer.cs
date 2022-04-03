@@ -55,7 +55,7 @@ namespace DidasUtils.ConsoleUI
             Vector2i localPos = position + sender.WindowPos;
             int maxSX = size.x == -1 ? Math.Min(sender.WindowSize.x - localPos.x, content.Length) : Math.Min(sender.WindowSize.x - localPos.x, size.x);
             int maxSY = size.y == -1 ? Math.Min(sender.WindowSize.y - localPos.y, content.Length) : Math.Min(sender.WindowSize.y - localPos.y, size.y);
-            Vector2i maxSpace = new Vector2i(maxSX, maxSY);
+            Vector2i maxSpace = new(maxSX, maxSY);
 
             if (maxSpace.x <= 0)
                 return;

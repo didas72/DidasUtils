@@ -284,6 +284,6 @@ namespace DidasUtils.Files
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static SettingsDocument Deserialize(string path) => new SettingsDocument(File.ReadAllText(path));
+        public static SettingsDocument Deserialize(string path) => new(File.ReadAllText(path));
     }
 }

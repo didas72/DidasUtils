@@ -73,7 +73,7 @@ namespace DidasUtils.ErrorCorrection
         /// <returns></returns>
         public static ErrorProtectedBlock Deserialize(byte[] bytes)
         {
-            ErrorProtectedBlock ret = new ErrorProtectedBlock
+            ErrorProtectedBlock ret = new()
             {
                 errorProtectionType = (ErrorProtectionType)bytes[0],
                 data = new byte[BitConverter.ToUInt16(bytes, 1)]
@@ -93,7 +93,7 @@ namespace DidasUtils.ErrorCorrection
         /// <returns></returns>
         public static ErrorProtectedBlock[] DeserializeArray(byte[] bytes)
         {
-            List<ErrorProtectedBlock> blocks = new List<ErrorProtectedBlock>();
+            List<ErrorProtectedBlock> blocks = new();
 
             int head = 0;
             
@@ -124,7 +124,7 @@ namespace DidasUtils.ErrorCorrection
         /// <returns>An array of ErrorProtectedBlocks holding the protected data.</returns>
         public static ErrorProtectedBlock[] ProtectData(byte[] data, ErrorProtectionType protectionType, int protectedBlockSize)
         {
-            List<ErrorProtectedBlock> blocks = new List<ErrorProtectedBlock>();
+            List<ErrorProtectedBlock> blocks = new();
             int head = 0;
 
             while (head > data.Length)
@@ -147,7 +147,7 @@ namespace DidasUtils.ErrorCorrection
         /// <returns>A byte array holding the protected data.</returns>
         public static byte[] ProtectDataToArray(byte[] data, ErrorProtectionType protectionType, int protectedBlockSize)
         {
-            List<byte> bytes = new List<byte>();
+            List<byte> bytes = new();
 
             foreach (ErrorProtectedBlock b in ProtectData(data, protectionType, protectedBlockSize)) bytes.AddRange(Serialize(b));
 
@@ -169,7 +169,9 @@ namespace DidasUtils.ErrorCorrection
                 case ErrorProtectionType.Fletcher32:
                     return BitConverter.GetBytes(Fletcher.Fletcher32(data));
 
-                case ErrorProtectionType.None: return Array.Empty<byte>();
+                case ErrorProtectionType.None: 
+                    return Array.Empty<byte>();
+
                 default: throw new NotImplementedException();
             }
         }

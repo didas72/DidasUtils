@@ -24,7 +24,7 @@ namespace DidasUtils
         /// <returns>Array containing the full paths of every file found.</returns>
         public static string[] GetSubFiles(string directory, string searchPattern)
         {
-            List<string> files = new List<string>();
+            List<string> files = new();
 
             if (string.IsNullOrEmpty(searchPattern))
             {
@@ -51,7 +51,7 @@ namespace DidasUtils
         /// <returns>Array containing the full paths of every file found.</returns>
         public static string[] GetSubFilesSorted(string directory, string searchPattern)
         {
-            List<string> files = new List<string>();
+            List<string> files = new();
 
             files.AddRange(Directory.GetFiles(directory, searchPattern));
 
@@ -70,8 +70,8 @@ namespace DidasUtils
         /// <returns>Sorted paths array.</returns>
         public static string[] SortFiles(string[] filenames)
         {
-            Dictionary<ulong, string> files = new Dictionary<ulong, string>();
-            List<string> sorted = new List<string>();
+            Dictionary<ulong, string> files = new();
+            List<string> sorted = new();
 
             for (int i = 0; i < filenames.Length; i++)
             {
@@ -101,8 +101,8 @@ namespace DidasUtils
         /// <returns>Sorted paths array.</returns>
         public static string[] SortDirs(string[] dirnames)
         {
-            Dictionary<ulong, string> dirs = new Dictionary<ulong, string>();
-            List<string> sorted = new List<string>();
+            Dictionary<ulong, string> dirs = new();
+            List<string> sorted = new();
 
             for (int i = 0; i < dirnames.Length; i++)
             {

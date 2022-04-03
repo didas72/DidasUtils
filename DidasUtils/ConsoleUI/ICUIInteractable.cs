@@ -23,7 +23,7 @@ namespace DidasUtils.ConsoleUI
         public InteractEventArgs(CUIElement.ElementType type)
         {
             this.type = type;
-            arguments = new string[0];
+            arguments = Array.Empty<string>();
         }
         public InteractEventArgs(CUIElement.ElementType type, string[] args)
         {

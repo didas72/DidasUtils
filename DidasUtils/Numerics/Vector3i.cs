@@ -30,7 +30,7 @@ namespace DidasUtils.Numerics
         /// <summary>
         /// Default 0,0,0 vector.
         /// </summary>
-        public static readonly Vector3i Zero = new Vector3i(0, 0, 0);
+        public static readonly Vector3i Zero = new(0, 0, 0);
 
 
 
@@ -48,7 +48,7 @@ namespace DidasUtils.Numerics
         /// Convertes the Vector3i to a Vector3.
         /// </summary>
         /// <returns></returns>
-        public Vector3 ToVector3() => new Vector3(x, y, z);
+        public Vector3 ToVector3() => new(x, y, z);
 
 
 
@@ -80,34 +80,34 @@ namespace DidasUtils.Numerics
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        public static Vector3i operator -(Vector3i a) => new Vector3i(-a.x, -a.y, -a.z);
+        public static Vector3i operator -(Vector3i a) => new(-a.x, -a.y, -a.z);
         /// <summary>
         /// 
         /// </summary>
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public static Vector3i operator +(Vector3i a, Vector3i b) => new Vector3i(a.x + b.x, a.y + b.y, a.z + b.z);
+        public static Vector3i operator +(Vector3i a, Vector3i b) => new(a.x + b.x, a.y + b.y, a.z + b.z);
         /// <summary>
         /// 
         /// </summary>
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public static Vector3i operator -(Vector3i a, Vector3i b) => new Vector3i(a.x - b.x, a.y - b.y, a.z - b.z);
+        public static Vector3i operator -(Vector3i a, Vector3i b) => new(a.x - b.x, a.y - b.y, a.z - b.z);
         /// <summary>
         /// 
         /// </summary>
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public static Vector3i operator *(Vector3i a, Vector3i b) => new Vector3i(a.x * b.x, a.y * b.y, a.z * b.z);
+        public static Vector3i operator *(Vector3i a, Vector3i b) => new(a.x * b.x, a.y * b.y, a.z * b.z);
         /// <summary>
         /// 
         /// </summary>
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public static Vector3i operator /(Vector3i a, Vector3i b) => new Vector3i(a.x / b.x, a.y / b.y, a.z / b.z);
+        public static Vector3i operator /(Vector3i a, Vector3i b) => new(a.x / b.x, a.y / b.y, a.z / b.z);
     }
 }

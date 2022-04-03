@@ -67,7 +67,7 @@ namespace DidasUtils.ConsoleUI
 
         public void Interact(ConsoleKeyInfo info)
         {
-            InteractEventArgs e = new InteractEventArgs(Type);
+            InteractEventArgs e = new(Type);
 
             OnInteract?.Invoke(this, e);
         }

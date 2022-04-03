@@ -22,7 +22,7 @@ namespace DidasUtils.Extensions
         {
             if (string.IsNullOrEmpty(value))
                 return value;
-            return value.Length <= maxLength ? value : value.Substring(0, maxLength);
+            return value.Length <= maxLength ? value : value[..maxLength];
         }
         /// <summary>
         /// Returns a string with the given length, either truncated or padded with spaces.
@@ -34,7 +34,7 @@ namespace DidasUtils.Extensions
         public static string SetLength(this string value, int length)
         {
             if (value.Length >= length)
-                return value.Substring(0, length);
+                return value[..length];
 
             return value += " ".Loop(length - value.Length);
         }
@@ -124,7 +124,7 @@ namespace DidasUtils.Extensions
         /// <returns></returns>
         public static int[] GetIndexesOf(this string str, string value)
         {
-            List<int> outp = new List<int>();
+            List<int> outp = new();
             int last = 0;
 
             while (true)
