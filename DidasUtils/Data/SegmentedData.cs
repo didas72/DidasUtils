@@ -87,7 +87,7 @@ namespace DidasUtils.Data
             {
                 byte[] block = new byte[blockSize];
 
-                while (stream.Length - stream.Position < blockSize)
+                while (stream.Length - stream.Position == 0) //change to account for partial delivery of data
                 {
                     if (DateTime.Now - start > timeout) return Array.Empty<byte>();
                     Thread.Sleep(1);
@@ -130,7 +130,7 @@ namespace DidasUtils.Data
             {
                 byte[] block = new byte[blockSize];
 
-                while (stream.Socket.Available < blockSize)
+                while (stream.Socket.Available == 0) //change to account for partial delivery of data
                 {
                     if (DateTime.Now - start > timeout) return Array.Empty<byte>();
                     Thread.Sleep(1);
