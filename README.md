@@ -1,5 +1,6 @@
 # DidasUtils
 Library with random stuff made by me!
+This library is tightly linked to my Primes project, some of the content in here was made specifically for the project. Take a look at it! https://github.com/didas72/Primes
 
 ## "Modules"
 While this library is more of a collection of little patches of code, this code is grouped into namespaces.
