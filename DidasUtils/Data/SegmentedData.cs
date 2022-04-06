@@ -68,12 +68,14 @@ namespace DidasUtils.Data
         /// <param name="stream">The stream to read from.</param>
         /// <param name="blockSize">The expected size of the blocks to receive.</param>
         /// <returns></returns>
-        public static byte[] ReadFromStream(Stream stream, int blockSize)
+        public static byte[] ReadFromStream(Stream stream, int blockSize, TimeSpan timeout = new TimeSpan())
         {
             if (!stream.CanRead)
                 throw new ArgumentException("Stream must be readable.");
             if (blockSize <= 256)
                 throw new ArgumentException("Block size must be at least 256 bytes.");
+
+            DateTime start = DateTime.Now;
 
             List<byte> bytes = new();
 
@@ -81,7 +83,11 @@ namespace DidasUtils.Data
             {
                 byte[] block = new byte[blockSize];
 
-                while (stream.Length - stream.Position < blockSize) Thread.Sleep(1);
+                while (stream.Length - stream.Position < blockSize)
+                {
+                    if (DateTime.Now - start > timeout) return Array.Empty<byte>();
+                    Thread.Sleep(1);
+                }
 
                 stream.Read(block, 0, blockSize);
 
