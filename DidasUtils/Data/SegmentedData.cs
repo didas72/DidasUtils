@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using System.Net.Sockets;
 
 namespace DidasUtils.Data
 {
@@ -67,9 +68,12 @@ namespace DidasUtils.Data
         /// </summary>
         /// <param name="stream">The stream to read from.</param>
         /// <param name="blockSize">The expected size of the blocks to receive.</param>
+        /// <param name="timeout">The maximum time the operation is allowed to take.</param>
         /// <returns></returns>
         public static byte[] ReadFromStream(Stream stream, int blockSize, TimeSpan timeout = new TimeSpan())
         {
+            if (!stream.CanSeek)
+                throw new ArgumentException("Stream must be seekable. If using a NetworkStream, use ReadFromSocket.");
             if (!stream.CanRead)
                 throw new ArgumentException("Stream must be readable.");
             if (blockSize <= 256)
@@ -84,6 +88,49 @@ namespace DidasUtils.Data
                 byte[] block = new byte[blockSize];
 
                 while (stream.Length - stream.Position < blockSize)
+                {
+                    if (DateTime.Now - start > timeout) return Array.Empty<byte>();
+                    Thread.Sleep(1);
+                }
+
+                stream.Read(block, 0, blockSize);
+
+                int remainingBlocks = BitConverter.ToInt32(block, 0) - 1;
+                int dataInBlock = BitConverter.ToInt32(block, 4);
+
+                byte[] dataBytes = new byte[dataInBlock];
+                Array.Copy(block, headerSize, dataBytes, 0, dataInBlock);
+
+                bytes.AddRange(dataBytes);
+
+                if (remainingBlocks == 0)
+                    break;
+            }
+
+            return bytes.ToArray();
+        }
+
+        /// <summary>
+        /// Reads a byte array received in blocks.
+        /// </summary>
+        /// <param name="stream">The stream to read from.</param>
+        /// <param name="blockSize">The expected size of the blocks to receive.</param>
+        /// <param name="timeout">The maximum time the operation is allowed to take.</param>
+        /// <returns></returns>
+        public static byte[] ReadFromSocket(NetworkStream stream, int blockSize, TimeSpan timeout = new TimeSpan())
+        {
+            if (blockSize <= 256)
+                throw new ArgumentException("Block size must be at least 256 bytes.");
+
+            DateTime start = DateTime.Now;
+
+            List<byte> bytes = new();
+
+            while (true)
+            {
+                byte[] block = new byte[blockSize];
+
+                while (stream.Socket.Available < blockSize)
                 {
                     if (DateTime.Now - start > timeout) return Array.Empty<byte>();
                     Thread.Sleep(1);
