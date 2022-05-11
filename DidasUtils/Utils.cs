@@ -160,7 +160,7 @@ namespace DidasUtils
         /// </summary>
         /// <param name="num">The number to format.</param>
         /// <returns></returns>
-        public static string FormatNumber(int num)
+        public static string FormatNumber(long num)
         {
             int p = 0;
             float b;
@@ -178,6 +178,68 @@ namespace DidasUtils
             string ret = s ? "-" : "";
 
             ret += b.ToString("F2");
+
+            return p switch
+            {
+                0 => ret,
+                1 => ret + "k",
+                2 => ret + "M",
+                3 => ret + "B",
+                4 => ret + "T",
+                5 => ret + "Q",
+                _ => num.ToString(),
+            };
+        }
+        /// <summary>
+        /// Formats a number to a smaller, human readable value with 2 decimal places.
+        /// </summary>
+        /// <param name="num">The number to format.</param>
+        /// <returns></returns>
+        public static string FormatNumber(ulong num)
+        {
+            int p = 0;
+            float b;
+
+            b = num;
+
+            while (b > 1000)
+            {
+                p++;
+                b /= 1000;
+            }
+
+            string ret = b.ToString("F2");
+
+            return p switch
+            {
+                0 => ret,
+                1 => ret + "k",
+                2 => ret + "M",
+                3 => ret + "B",
+                4 => ret + "T",
+                5 => ret + "Q",
+                _ => num.ToString(),
+            };
+        }
+        /// <summary>
+        /// Formats a number to a smaller, human readable value with 2 decimal places.
+        /// </summary>
+        /// <param name="num">The number to format.</param>
+        /// <returns></returns>
+        public static string FormatNumber(double num)
+        {
+            int p = 0;
+            double b;
+
+            b = num;
+
+            while (b > 1000)
+            {
+                p++;
+                b /= 1000;
+            }
+
+            string ret = b.ToString("F2");
 
             return p switch
             {
