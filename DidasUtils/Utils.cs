@@ -155,6 +155,41 @@ namespace DidasUtils
 
             return $"{(size / 1099511627776):N2}TB";
         }
+        /// <summary>
+        /// Formats a number to a smaller, human readable value with 2 decimal places.
+        /// </summary>
+        /// <param name="num">The number to format.</param>
+        /// <returns></returns>
+        public static string FormatNumber(int num)
+        {
+            int p = 0;
+            float b;
+            bool s;
+
+            s = num < 0;
+            b = s ? -num : num;
+
+            while (b > 1000)
+            {
+                p++;
+                b /= 1000;
+            }
+
+            string ret = s ? "-" : "";
+
+            ret += b.ToString("F2");
+
+            return p switch
+            {
+                0 => ret,
+                1 => ret + "k",
+                2 => ret + "M",
+                3 => ret + "B",
+                4 => ret + "T",
+                5 => ret + "Q",
+                _ => num.ToString(),
+            };
+        }
 
 
 

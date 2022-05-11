@@ -297,12 +297,22 @@
             <param name="stream">The stream to send the data to.</param>
             <param name="blockSize">The size of the blocks to be sent.</param>
         </member>
-        <member name="M:DidasUtils.Data.SegmentedData.ReadFromStream(System.IO.Stream,System.Int32)">
+        <member name="M:DidasUtils.Data.SegmentedData.ReadFromStream(System.IO.Stream,System.Int32,System.TimeSpan)">
             <summary>
             Reads a byte array received in blocks.
             </summary>
             <param name="stream">The stream to read from.</param>
             <param name="blockSize">The expected size of the blocks to receive.</param>
+            <param name="timeout">The maximum time the operation is allowed to take.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Data.SegmentedData.ReadFromSocket(System.Net.Sockets.NetworkStream,System.Int32,System.TimeSpan)">
+            <summary>
+            Reads a byte array received in blocks.
+            </summary>
+            <param name="stream">The stream to read from.</param>
+            <param name="blockSize">The expected size of the blocks to receive.</param>
+            <param name="timeout">The maximum time the operation is allowed to take.</param>
             <returns></returns>
         </member>
         <member name="T:DidasUtils.ErrorCorrection.CheckSum">
@@ -1103,7 +1113,7 @@
             The wrapped TcpClient instance.
             </summary>
         </member>
-        <member name="E:DidasUtils.Net.Client.messageReceived">
+        <member name="E:DidasUtils.Net.Client.MessageReceived">
             <summary>
             The callback for when a message is received.
             </summary>
@@ -1131,7 +1141,7 @@
         </member>
         <member name="M:DidasUtils.Net.Client.StartListening">
             <summary>
-            Starts listening for incoming messages, calling <see cref="E:DidasUtils.Net.Client.messageReceived"/> callback when needed.
+            Starts listening for incoming messages, calling <see cref="!:messageReceived"/> callback when needed.
             </summary>
         </member>
         <member name="M:DidasUtils.Net.Client.StopListening">
