@@ -1441,6 +1441,27 @@
             </summary>
             <param name="size">The size, in bytes, to format.</param>
         </member>
+        <member name="M:DidasUtils.Utils.FormatNumber(System.Int64)">
+            <summary>
+            Formats a number to a smaller, human readable value with 2 decimal places.
+            </summary>
+            <param name="num">The number to format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Utils.FormatNumber(System.UInt64)">
+            <summary>
+            Formats a number to a smaller, human readable value with 2 decimal places.
+            </summary>
+            <param name="num">The number to format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DidasUtils.Utils.FormatNumber(System.Double)">
+            <summary>
+            Formats a number to a smaller, human readable value with 2 decimal places.
+            </summary>
+            <param name="num">The number to format.</param>
+            <returns></returns>
+        </member>
         <member name="M:DidasUtils.Utils.WaitForKey">
             <summary>
             Waits for a key to be pressed while in console.

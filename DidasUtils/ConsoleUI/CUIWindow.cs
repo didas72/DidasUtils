@@ -27,7 +27,21 @@ namespace DidasUtils.ConsoleUI
 
 
 
-        public CUIWindow(Vector2i size) => new CUIWindow(size, Vector2i.Zero);
+        public CUIWindow(Vector2i size)
+        {
+            Pages = new List<CUIPage>();
+
+            WindowSize = size;
+            WindowPos = Vector2i.Zero;
+            selectedPage = 0;
+
+            TabBackgroundColor = ConsoleColor.DarkGray;
+            TabForegroundColor = ConsoleColor.Gray;
+            SelTabBackgroundColor = ConsoleColor.DarkGreen;
+            SelTabForegroundColor = ConsoleColor.White;
+            TabSepBackgroundColor = ConsoleColor.Black;
+            TabSepForegroundColor = ConsoleColor.Black;
+        }
         public CUIWindow(Vector2i size, Vector2i position)
         {
             Pages = new List<CUIPage>();

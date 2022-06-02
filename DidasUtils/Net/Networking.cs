@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.IO;
+using System.Net.Http;
 
 namespace DidasUtils.Net
 {
@@ -15,26 +16,29 @@ namespace DidasUtils.Net
         /// <returns>Boolean indicating the operation's success.</returns>
         public static bool TryDownloadFile(string url, string path)
         {
-            bool ret = true;
+            HttpClient cli = new();
+            HttpRequestMessage req = new(HttpMethod.Get, url);
+            HttpResponseMessage resp = cli.Send(req);
 
-            WebClient client = new();
+            cli.Dispose();
+            req.Dispose();
+
+            if (!resp.IsSuccessStatusCode) return false;
 
             try
             {
-                client.DownloadFile(url, path);
+                HttpContent cont = resp.Content;
+                FileStream file = File.OpenWrite(path);
+                cont.ReadAsStream().CopyTo(file);
+                cont.Dispose();
+                file.Close();
             }
-            catch
-            {
-                ret = false;
-            }
+            catch { return false; }
 
-            client.Dispose();
+            resp.Dispose();
 
-            return ret;
+            return true;
         }
-
-
-
         /// <summary>
         /// Checks wether a given URL is accessible.
         /// </summary>
@@ -42,20 +46,16 @@ namespace DidasUtils.Net
         /// <returns></returns>
         public static bool IsUrlUp(string url)
         {
-            HttpWebRequest request = WebRequest.CreateHttp(url);
+            HttpClient cli = new();
+            HttpRequestMessage request = new(HttpMethod.Head, url);
+            var resp = cli.Send(request);
+            bool ret = resp.IsSuccessStatusCode;
 
-            request.Method = "HEAD";
+            resp.Dispose();
+            request.Dispose();
+            cli.Dispose();
 
-            try
-            {
-                request.GetResponse();
-            }
-            catch
-            {
-                return false;
-            }
-
-            return true;
+            return ret;
         }
     }
 }

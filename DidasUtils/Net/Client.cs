@@ -56,7 +56,7 @@ namespace DidasUtils.Net
 
 
         /// <summary>
-        /// Starts listening for incoming messages, calling <see cref="messageReceived"/> callback when needed.
+        /// Starts listening for incoming messages.
         /// </summary>
         public void StartListening()
         {

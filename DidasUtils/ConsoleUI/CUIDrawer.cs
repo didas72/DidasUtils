@@ -15,6 +15,8 @@ namespace DidasUtils.ConsoleUI
         private static Vector2i consoleSize;
         public static Vector2i ConsoleSize { get => consoleSize; set
             {
+                if (!OperatingSystem.IsWindows()) throw new PlatformNotSupportedException();
+
                 consoleSize = value;
                 Console.SetWindowSize(consoleSize.x, consoleSize.y);
                 Console.SetBufferSize(consoleSize.x + 1, consoleSize.y + 1);
@@ -25,7 +27,7 @@ namespace DidasUtils.ConsoleUI
         public static void Init(Vector2i consoleSize)
         {
             Windows = new List<CUIWindow>();
-            ConsoleSize = consoleSize;
+            if (OperatingSystem.IsWindows()) ConsoleSize = consoleSize;
             Console.CursorVisible = false;
         }
         public static void AddWindow(CUIWindow window)
