@@ -46,6 +46,7 @@ namespace DidasUtils.ErrorCorrection
         /// <returns></returns>
         public static uint Fletcher32(byte[] source)
         {
+            //TODO: test without this
             if ((source.Length % 2) != 0)
                 source = source.Append<byte>(0).ToArray();
 

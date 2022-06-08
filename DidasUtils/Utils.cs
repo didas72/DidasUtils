@@ -262,5 +262,30 @@ namespace DidasUtils
         {
             Console.ReadKey(true);
         }
+
+
+
+        /// <summary>
+        /// Copies a directory recursively.
+        /// </summary>
+        /// <param name="original"></param>
+        /// <param name="final"></param>
+        public static void CopyDirectory(string original, string final)
+        {
+            if (!Directory.Exists(final))
+                Directory.CreateDirectory(final);
+
+            string[] files = Directory.GetFiles(original);
+
+            foreach (string file in files)
+                File.Copy(file, Path.Combine(final, Path.GetFileName(file)));
+
+            string[] folders = Directory.GetDirectories(original);
+
+            foreach (string folder in folders)
+            {
+                CopyDirectory(folder, Path.Combine(final, Path.GetFileName(folder)));
+            }
+        }
     }
 }
