@@ -40,14 +40,6 @@ namespace DidasUtils.Numerics
 
 
         /// <summary>
-        /// Convertes the Vector2i to a Vector2.
-        /// </summary>
-        /// <returns></returns>
-        public Vector2 ToVector2() => new(x, y);
-
-
-
-        /// <summary>
         /// Calculates the dot product between two vectors.
         /// </summary>
         /// <param name="a"></param>
@@ -104,5 +96,53 @@ namespace DidasUtils.Numerics
         /// <param name="b"></param>
         /// <returns></returns>
         public static Vector2i operator /(Vector2i a, Vector2i b) => new(a.x / b.x, a.y / b.y);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static Vector2i operator *(Vector2i a, int s) => new (a.x * s, a.y * s);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static Vector2i operator *(Vector2i a, float s) => new ((int)(a.x * s), (int)(a.y * s));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static Vector2i operator *(Vector2i a, double s) => new ((int)(a.x * s), (int)(a.y * s));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static Vector2i operator /(Vector2i a, int s) => new(a.x / s, a.y / s);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static Vector2i operator /(Vector2i a, float s) => new((int)(a.x / s), (int)(a.y / s));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static Vector2i operator /(Vector2i a, double s) => new((int)(a.x / s), (int)(a.y / s));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+
+        public static explicit operator Vector2(Vector2i a) => new (a.x, a.y);
     }
 }

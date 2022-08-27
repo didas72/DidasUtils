@@ -109,5 +109,53 @@ namespace DidasUtils.Numerics
         /// <param name="b"></param>
         /// <returns></returns>
         public static Vector3i operator /(Vector3i a, Vector3i b) => new(a.x / b.x, a.y / b.y, a.z / b.z);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static Vector3i operator *(Vector3i a, int s) => new(a.x * s, a.y * s, a.z * s);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static Vector3i operator *(Vector3i a, float s) => new((int)(a.x * s), (int)(a.y * s), (int)(a.z * s));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static Vector3i operator *(Vector3i a, double s) => new((int)(a.x * s), (int)(a.y * s), (int)(a.z * s));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static Vector3i operator /(Vector3i a, int s) => new(a.x / s, a.y / s, a.z / s);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static Vector3i operator /(Vector3i a, float s) => new((int)(a.x / s), (int)(a.y / s), (int)(a.z / s));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static Vector3i operator /(Vector3i a, double s) => new((int)(a.x / s), (int)(a.y / s), (int)(a.z / s));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+
+        public static explicit operator Vector3(Vector3i a) => new(a.x, a.y, a.z);
     }
 }

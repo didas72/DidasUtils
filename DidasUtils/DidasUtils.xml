@@ -1141,7 +1141,7 @@
         </member>
         <member name="M:DidasUtils.Net.Client.StartListening">
             <summary>
-            Starts listening for incoming messages, calling <see cref="!:messageReceived"/> callback when needed.
+            Starts listening for incoming messages.
             </summary>
         </member>
         <member name="M:DidasUtils.Net.Client.StopListening">
@@ -1466,6 +1466,13 @@
             <summary>
             Waits for a key to be pressed while in console.
             </summary>
+        </member>
+        <member name="M:DidasUtils.Utils.CopyDirectory(System.String,System.String)">
+            <summary>
+            Copies a directory recursively.
+            </summary>
+            <param name="original"></param>
+            <param name="final"></param>
         </member>
     </members>
 </doc>
