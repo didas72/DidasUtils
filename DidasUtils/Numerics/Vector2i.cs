@@ -144,5 +144,10 @@ namespace DidasUtils.Numerics
         /// <param name="a"></param>
 
         public static explicit operator Vector2(Vector2i a) => new (a.x, a.y);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        public static explicit operator Vector2i(Vector2 a) => new((int)a.X, (int)a.Y);
     }
 }
