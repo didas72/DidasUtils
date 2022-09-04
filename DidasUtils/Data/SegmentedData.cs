@@ -37,29 +37,23 @@ namespace DidasUtils.Data
             int dataBlockSize = blockSize - headerSize;
             int remainingBlocks = Mathf.DivideRoundUp(data.Length, dataBlockSize);
             int head = 0;
+            byte[] buffer = new byte[blockSize];
 
             while (remainingBlocks > 0)
             {
                 int dataInBlock = Math.Min(data.Length - head, dataBlockSize);
 
                 //add header containing: block size, remaining blocks and size of data block
-                stream.Write(BitConverter.GetBytes(remainingBlocks), 0, 4);
-                stream.Write(BitConverter.GetBytes(dataInBlock), 0, 4);
-                stream.Write(data, head, dataInBlock);
-
-                if (remainingBlocks == 0)
-                {
-                    byte[] padding = new byte[dataBlockSize - dataInBlock];
-                    Array.Clear(padding, 0, padding.Length);
-
-                    stream.Write(padding, 0, padding.Length);
-                }
+                BitConverter.GetBytes(--remainingBlocks).CopyTo(buffer, 0);
+                BitConverter.GetBytes(dataInBlock).CopyTo(buffer, 4);
+                Array.Copy(data, head, buffer, 8, dataInBlock);
+                //no need to clear padding part of the buffer, data is ignored anyway
+                stream.Write(buffer, 0, blockSize);
 
                 head += dataInBlock;
 
-                stream.Flush();
-
-                remainingBlocks--;
+                if (stream is not NetworkStream)
+                    stream.Flush();
             }
         }
 
@@ -70,7 +64,7 @@ namespace DidasUtils.Data
         /// <param name="blockSize">The expected size of the blocks to receive.</param>
         /// <param name="timeout">The maximum time the operation is allowed to take.</param>
         /// <returns></returns>
-        public static byte[] ReadFromStream(Stream stream, int blockSize, TimeSpan timeout = new TimeSpan())
+        public static byte[] ReadFromStream(Stream stream, int blockSize, TimeSpan timeout = new())
         {
             if (!stream.CanSeek)
                 throw new ArgumentException("Stream must be seekable. If using a NetworkStream, use ReadFromSocket.");
@@ -87,7 +81,7 @@ namespace DidasUtils.Data
             {
                 byte[] block = new byte[blockSize];
 
-                while (stream.Length - stream.Position == 0) //change to account for partial delivery of data
+                while (stream.Length - stream.Position >= blockSize)
                 {
                     if (DateTime.Now - start > timeout) return Array.Empty<byte>();
                     Thread.Sleep(1);
@@ -95,7 +89,7 @@ namespace DidasUtils.Data
 
                 stream.Read(block, 0, blockSize);
 
-                int remainingBlocks = BitConverter.ToInt32(block, 0) - 1;
+                int remainingBlocks = BitConverter.ToInt32(block, 0);
                 int dataInBlock = BitConverter.ToInt32(block, 4);
 
                 byte[] dataBytes = new byte[dataInBlock];
@@ -117,7 +111,7 @@ namespace DidasUtils.Data
         /// <param name="blockSize">The expected size of the blocks to receive.</param>
         /// <param name="timeout">The maximum time the operation is allowed to take.</param>
         /// <returns></returns>
-        public static byte[] ReadFromSocket(NetworkStream stream, int blockSize, TimeSpan timeout = new TimeSpan())
+        public static byte[] ReadFromSocket(NetworkStream stream, int blockSize, TimeSpan timeout = new())
         {
             if (blockSize <= 256)
                 throw new ArgumentException("Block size must be at least 256 bytes.");
@@ -130,15 +124,18 @@ namespace DidasUtils.Data
             {
                 byte[] block = new byte[blockSize];
 
-                while (stream.Socket.Available == 0) //change to account for partial delivery of data
+                while (stream.Socket.Available < blockSize)
                 {
-                    if (DateTime.Now - start > timeout) return Array.Empty<byte>();
+                    if (!stream.Socket.Connected)
+                        return Array.Empty<byte>();
+                    if (DateTime.Now - start > timeout)
+                        return Array.Empty<byte>();
                     Thread.Sleep(1);
                 }
 
                 stream.Read(block, 0, blockSize);
 
-                int remainingBlocks = BitConverter.ToInt32(block, 0) - 1;
+                int remainingBlocks = BitConverter.ToInt32(block, 0);
                 int dataInBlock = BitConverter.ToInt32(block, 4);
 
                 byte[] dataBytes = new byte[dataInBlock];
