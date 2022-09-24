@@ -18,7 +18,7 @@ namespace DidasUtils.Files
             ProcessStartInfo i = new()
             {
                 FileName = "7za.exe",
-                Arguments = $"a {outDir} {sourceDir}",
+                Arguments = $"a {outDir} {sourceDir} > nul",
                 WindowStyle = ProcessWindowStyle.Hidden
             };
 
@@ -39,7 +39,7 @@ namespace DidasUtils.Files
             ProcessStartInfo i = new()
             {
                 FileName = "7za.exe",
-                Arguments = $"x {sourceDir} -o{outDir} -r",
+                Arguments = $"x {sourceDir} -o{outDir} -r > nul",
                 WindowStyle = ProcessWindowStyle.Hidden
             };
 
