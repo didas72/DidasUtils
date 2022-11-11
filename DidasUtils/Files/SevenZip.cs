@@ -13,13 +13,16 @@ namespace DidasUtils.Files
         /// </summary>
         /// <param name="sourceDir">The directory or file to compress.</param>
         /// <param name="outDir">The output file.</param>
-        public static void Compress7z(string sourceDir, string outDir)
+        /// <param name="threads">The number of threads to be used by 7Zip.</param>
+        /// <param name="compressionLevel">The compression level to be used. (1-9)</param>
+        public static void Compress7z(string sourceDir, string outDir, int threads = 4, int compressionLevel = 9)
         {
             ProcessStartInfo i = new()
             {
                 FileName = "7za.exe",
-                Arguments = $"a {outDir} {sourceDir} > nul",
-                WindowStyle = ProcessWindowStyle.Hidden
+                Arguments = $"a -mx{compressionLevel} -mmt{threads} {outDir} {sourceDir}",
+                WindowStyle = ProcessWindowStyle.Hidden,
+                RedirectStandardOutput = true,
             };
 
 
@@ -40,7 +43,8 @@ namespace DidasUtils.Files
             {
                 FileName = "7za.exe",
                 Arguments = $"x {sourceDir} -o{outDir} -r > nul",
-                WindowStyle = ProcessWindowStyle.Hidden
+                WindowStyle = ProcessWindowStyle.Hidden,
+                RedirectStandardOutput = true,
             };
 
             Process p = Process.Start(i);
@@ -54,12 +58,14 @@ namespace DidasUtils.Files
         /// </summary>
         /// <param name="sourceDir">The directory or file to compress.</param>
         /// <param name="outDir">The output file.</param>
+        /// <param name="threads">The number of threads to be used by 7Zip.</param>
+        /// <param name="compressionLevel">The compression level to be used. (1-9)</param>
         /// <returns>Boolean indicating the operation's success.</returns>
-        public static bool TryCompress7z(string sourceDir, string outDir)
+        public static bool TryCompress7z(string sourceDir, string outDir, int threads = 4, int compressionLevel = 9)
         {
             try
             {
-                Compress7z(sourceDir, outDir);
+                Compress7z(sourceDir, outDir, threads, compressionLevel);
             }
             catch { return false; }
             return true;

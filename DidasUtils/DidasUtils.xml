@@ -827,12 +827,14 @@
             Class containing methods to use the SevenZip utility.
             </summary>
         </member>
-        <member name="M:DidasUtils.Files.SevenZip.Compress7z(System.String,System.String)">
+        <member name="M:DidasUtils.Files.SevenZip.Compress7z(System.String,System.String,System.Int32,System.Int32)">
             <summary>
             Compresses a directory or file into a .7z file.
             </summary>
             <param name="sourceDir">The directory or file to compress.</param>
             <param name="outDir">The output file.</param>
+            <param name="threads">The number of threads to be used by 7Zip.</param>
+            <param name="compressionLevel">The compression level to be used. (1-9)</param>
         </member>
         <member name="M:DidasUtils.Files.SevenZip.Decompress7z(System.String,System.String)">
             <summary>
@@ -841,12 +843,14 @@
             <param name="sourceDir">The file to decompress</param>
             <param name="outDir">The directory to store the decompressed files to.</param>
         </member>
-        <member name="M:DidasUtils.Files.SevenZip.TryCompress7z(System.String,System.String)">
+        <member name="M:DidasUtils.Files.SevenZip.TryCompress7z(System.String,System.String,System.Int32,System.Int32)">
             <summary>
             Compresses a directory or file into a .7z file.
             </summary>
             <param name="sourceDir">The directory or file to compress.</param>
             <param name="outDir">The output file.</param>
+            <param name="threads">The number of threads to be used by 7Zip.</param>
+            <param name="compressionLevel">The compression level to be used. (1-9)</param>
             <returns>Boolean indicating the operation's success.</returns>
         </member>
         <member name="M:DidasUtils.Files.SevenZip.TryDecompress7z(System.String,System.String)">
