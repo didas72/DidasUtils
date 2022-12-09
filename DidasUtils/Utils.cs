@@ -56,7 +56,8 @@ namespace DidasUtils
             files.AddRange(Directory.GetFiles(directory, searchPattern));
 
             string[] dirs = Directory.GetDirectories(directory);
-            dirs = SortDirs(dirs);
+
+            try { dirs = SortDirs(dirs); } catch { }
 
             foreach (string d in dirs)
                 files.AddRange(GetSubFiles(d, searchPattern));
