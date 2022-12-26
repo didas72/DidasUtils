@@ -72,6 +72,17 @@ namespace DidasUtils.Numerics
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return $"<{x}:{y}:{z}>";
+        }
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
         public static Vector3i operator +(Vector3i a) => a;
