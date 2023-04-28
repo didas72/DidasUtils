@@ -1233,12 +1233,6 @@
             <param name="b"></param>
             <returns></returns>
         </member>
-        <member name="M:DidasUtils.Numerics.Vector2i.ToString">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:DidasUtils.Numerics.Vector2i.op_UnaryPlus(DidasUtils.Numerics.Vector2i)">
             <summary>
             
@@ -1403,12 +1397,6 @@
             </summary>
             <param name="a"></param>
             <param name="b"></param>
-            <returns></returns>
-        </member>
-        <member name="M:DidasUtils.Numerics.Vector3i.ToString">
-            <summary>
-            
-            </summary>
             <returns></returns>
         </member>
         <member name="M:DidasUtils.Numerics.Vector3i.op_UnaryPlus(DidasUtils.Numerics.Vector3i)">

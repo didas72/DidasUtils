@@ -15,7 +15,7 @@ namespace DidasUtils.Files
         /// <param name="outDir">The output file.</param>
         /// <param name="threads">The number of threads to be used by 7Zip.</param>
         /// <param name="compressionLevel">The compression level to be used. (1-9)</param>
-        public static void Compress7z(string sourceDir, string outDir, int threads = 4, int compressionLevel = 9)
+        public static void Compress7z(string sourceDir, string outDir, int threads = 4, int compressionLevel = 1)
         {
             ProcessStartInfo i = new()
             {
@@ -61,7 +61,7 @@ namespace DidasUtils.Files
         /// <param name="threads">The number of threads to be used by 7Zip.</param>
         /// <param name="compressionLevel">The compression level to be used. (1-9)</param>
         /// <returns>Boolean indicating the operation's success.</returns>
-        public static bool TryCompress7z(string sourceDir, string outDir, int threads = 4, int compressionLevel = 9)
+        public static bool TryCompress7z(string sourceDir, string outDir, int threads = 4, int compressionLevel = 1)
         {
             try
             {
